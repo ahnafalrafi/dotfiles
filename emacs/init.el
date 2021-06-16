@@ -55,7 +55,7 @@
 
 ;; New lines at EOF
 (setq-default require-final-newline nil)
-(setq-default mode-require-final-newline t
+(setq-default mode-require-final-newline t)
 (setq-default log-edit-require-final-newline nil)
 
 ;; Long lines
@@ -72,7 +72,7 @@
 (setq split-width-threshold 160)
 (setq split-height-threshold nil)
 
-;;; Load configuration files
+;;;  Load configuration files
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'aar-packages)
