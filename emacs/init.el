@@ -78,6 +78,7 @@
 (require 'aar-packages)
 (require 'aar-better-init)
 (require 'aar-keybindings)
+(require 'aar-visuals)
 
 (provide 'init)
 ;;; init.el ends here
