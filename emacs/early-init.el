@@ -10,9 +10,6 @@
 ;; Defer garbage collection
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Set file for custom.el to use
-(setq custom-file (concat user-emacs-directory "/custom.el"))
-
 (setq load-prefer-newer t)
 
 ;; Disable gui elements before they are initialized.

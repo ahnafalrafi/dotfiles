@@ -72,5 +72,11 @@
 (setq split-width-threshold 160)
 (setq split-height-threshold nil)
 
+;;; Load configuration files
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+(require 'aar-packages)
+(require 'aar-better-init)
+
 (provide 'init)
 ;;; init.el ends here
