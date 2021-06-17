@@ -46,5 +46,12 @@
 (setq-default show-trailing-whitespace t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
+;;; Snippets
+(aar/maybe-install-package 'yasnippet)
+(setq yas-indent-line 'auto)
+(require 'yasnippet)
+(yas-global-mode t)
+(defvaralias '% 'yas-selected-text)
+
 (provide 'aar-editor)
 ;;; aar-editor.el ends here

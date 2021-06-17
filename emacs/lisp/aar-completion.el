@@ -42,5 +42,38 @@
 (setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles . (partial-completion)))))
 
+;;; company-mode
+(aar/maybe-install-package 'company)
+
+(define-key company-mode-map (kbd "C-n")     #'company-select-next)
+(define-key company-mode-map (kbd "C-p")     #'company-select-previous)
+(define-key company-mode-map (kbd "C-x C-o") #'company-manual-begin)
+(define-key company-mode-map (kbd "C-x C-f") #'company-files)
+
+(define-key company-active-map (kbd "C-n") #'company-select-next-or-abort)
+(define-key company-active-map (kbd "C-p") #'company-select-previous-or-abort)
+(define-key company-active-map (kbd "C-j") #'company-select-next)
+(define-key company-active-map (kbd "C-k") #'company-select-previous)
+
+(defvar aar/company-backends-global '(company-capf
+                                      company-files
+                                      company-keywords
+                                      company-yasnippet)
+  "Values for `company-backends' used everywhere.")
+
+(setq company-backends aar/company-backends-global)
+(setq company-minimum-prefix-length 2)
+(setq company-idle-delay 0.0)
+(setq company-show-numbers nil)
+(setq company-selection-wrap-around t)
+(setq company-tooltip-idle-delay 0.0)
+(setq company-tooltip-limit 15)
+(setq company-minimum-prefix-length 1)
+(setq company-tooltip-align-annotations t)
+(setq company-transformers '(company-sort-by-backend-importance))
+
+(add-hook 'prog-mode-hook #'company-mode)
+(add-hook 'text-mode-hook #'company-mode)
+
 (provide 'aar-completion)
 ;;; aar-completion.el ends here
