@@ -80,6 +80,7 @@
 (require 'aar-keybindings)
 (require 'aar-visuals)
 (require 'aar-completion)
+(require 'aar-files)
 
 (provide 'init)
 ;;; init.el ends here
