@@ -81,7 +81,7 @@
 (require 'aar-visuals)
 (require 'aar-completion)
 (require 'aar-files)
-(require 'aar-buffers)
+(require 'aar-bufwinframes)
 
 (provide 'init)
 ;;; init.el ends here

@@ -160,18 +160,5 @@
 (define-key aar/leader-map (kbd "&") #'async-shell-command)
 (define-key aar/leader-map (kbd "u") #'universal-argument)
 
-;;;;;; <leader> bindings for managing windows
-(define-key aar/leader-map (kbd "w") 'evil-window-map)
-
-(define-key evil-window-map (kbd "C-h") #'evil-window-left)
-(define-key evil-window-map (kbd "C-j") #'evil-window-down)
-(define-key evil-window-map (kbd "C-k") #'evil-window-up)
-(define-key evil-window-map (kbd "C-l") #'evil-window-right)
-(define-key evil-window-map (kbd "C-q") #'evil-quit)
-(define-key evil-window-map (kbd "d")   #'evil-quit)
-(define-key evil-window-map (kbd "x")   #'kill-buffer-and-window)
-(define-key evil-window-map (kbd "f")   #'ffap-other-window)
-(define-key evil-window-map (kbd "C-f") #'ffap-other-window)
-
 (provide 'aar-keybindings)
 ;;; aar-keybindings.el ends here
