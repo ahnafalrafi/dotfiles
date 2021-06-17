@@ -46,15 +46,17 @@
 (aar/maybe-install-package 'company)
 
 (with-eval-after-load 'company
-  (define-key company-mode-map (kbd "C-n")     #'company-select-next)
-  (define-key company-mode-map (kbd "C-p")     #'company-select-previous)
-  (define-key company-mode-map (kbd "C-x C-o") #'company-manual-begin)
-  (define-key company-mode-map (kbd "C-x C-f") #'company-files)
+  (evil-define-key 'insert company-mode-map
+    (kbd "C-n")     #'company-select-next
+    (kbd "C-p")     #'company-select-previous
+    (kbd "C-x C-o") #'company-manual-begin
+    (kbd "C-x C-f") #'company-files)
 
-  (define-key company-active-map (kbd "C-n") #'company-select-next-or-abort)
-  (define-key company-active-map (kbd "C-p") #'company-select-previous-or-abort)
-  (define-key company-active-map (kbd "C-j") #'company-select-next)
-  (define-key company-active-map (kbd "C-k") #'company-select-previous))
+  (evil-define-key 'insert company-active-map
+    (kbd "C-n") #'company-select-next-or-abort
+    (kbd "C-p") #'company-select-previous-or-abort
+    (kbd "C-j") #'company-select-next
+    (kbd "C-k") #'company-select-previous))
 
 
 (defvar aar/company-backends-global '(company-capf
