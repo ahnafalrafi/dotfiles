@@ -20,6 +20,13 @@
   (kbd "] e") #'flymake-goto-next-error
   (kbd "[ e") #'flymake-goto-prev-error)
 
+;;; tree-sitter
+(aar/maybe-install-package 'tree-sitter)
+(aar/maybe-install-package 'tree-sitter-langs)
+(require 'tree-sitter)
+(require 'tree-sitter-langs)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
 ;;; eglot
 (aar/maybe-install-package 'eglot)
 (setq eglot-autoshutdown t)
