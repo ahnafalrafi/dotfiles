@@ -23,17 +23,19 @@ The default with no prefix is to insert the file name exactly as it appears in
 the minibuffer prompt."
   ;; Based on insert-file in Emacs -- ashawley 20080926
   (interactive "*fInsert file name: \nP")
-   (cond ((eq '- args)
-          (insert (file-relative-name filename)))
-         ((not (null args))
-          (insert (expand-file-name filename)))
-         (t
-          (insert filename))))
+  (cond ((eq '- args)
+         (insert (file-relative-name filename)))
+        ((not (null args))
+         (insert (expand-file-name filename)))
+        (t
+         (insert filename))))
 
 ;;;;;; Find file in config
 (defun aar/find-file-in-config ()
   "Find files in configuration directory using project.el"
   (interactive)
+  (if (not (featurep 'project))
+      (require 'project))
   (let* ((pr (project--find-in-directory (file-truename
                                           user-emacs-directory)))
          (dirs (list (project-root pr))))
@@ -95,7 +97,7 @@ the minibuffer prompt."
     (kbd "l")      #'dired-single-buffer)
 
   (all-the-icons-dired-mode))
- 
+
 (add-hook 'dired-mode-hook #'aar/dired-h)
 
 ;;; recentf
