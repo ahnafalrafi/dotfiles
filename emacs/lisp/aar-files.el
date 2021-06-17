@@ -63,9 +63,9 @@ the minibuffer prompt."
 (define-key aar/leader-file-map (kbd "s")   #'save-buffer)
 (define-key aar/leader-file-map (kbd "d")   #'dired)
 (define-key aar/leader-file-map (kbd "j")   #'dired-jump)
-(define-key aar/leader-file-map (kbd "i")   #'aar/insert-file-name
-(define-key aar/leader-file-map (kbd "p")   #'aar/find-file-in-config
-(define-key aar/leader-file-map (kbd "y y") #'aar/yank-buffer-file-path
+(define-key aar/leader-file-map (kbd "i")   #'aar/insert-file-name)
+(define-key aar/leader-file-map (kbd "p")   #'aar/find-file-in-config)
+(define-key aar/leader-file-map (kbd "y y") #'aar/yank-buffer-file-path)
 (define-key aar/leader-file-map (kbd "y d") #'aar/yank-buffer-dir-path)
 
 ;;; dired
@@ -95,7 +95,7 @@ the minibuffer prompt."
     (kbd "l")      #'dired-single-buffer)
 
   (all-the-icons-dired-mode))
-
+ 
 (add-hook 'dired-mode-hook #'aar/dired-h)
 
 ;;; recentf
