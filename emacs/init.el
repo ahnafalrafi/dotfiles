@@ -88,6 +88,8 @@
 (require 'aar-search)
 (require 'aar-code)
 (require 'aar-project-vc)
+(require 'aar-spelling)
+(require 'aar-apps)
 
 (provide 'init)
 ;;; init.el ends here
