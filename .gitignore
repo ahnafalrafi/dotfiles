@@ -1,0 +1,11 @@
+;; Compiled lisp files
+*.elc
+*.eln
+
+;; Directories containing packages and native-compiled lisp
+emacs/elpa/*
+emacs/eln-cache/*
+
+;; Directories from no-littering-mode
+emacs/etc/*
+emacs/var/*
