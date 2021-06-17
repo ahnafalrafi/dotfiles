@@ -84,5 +84,7 @@
 (require 'aar-bufwinframes)
 (require 'aar-help)
 
+(require 'aar-editor)
+
 (provide 'init)
 ;;; init.el ends here
