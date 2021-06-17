@@ -6,10 +6,8 @@
 
 ;;; which-key
 (aar/maybe-install-package 'which-key)
-
 (setq which-key-idle-delay 0.3)
 (setq which-key-allow-evil-operators t)
-
 (which-key-mode)
 (which-key-setup-side-window-bottom)
 
@@ -20,7 +18,6 @@
 
 ;;; evil
 (aar/maybe-install-package 'evil)
-
 (setq evil-want-integration t)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
@@ -38,24 +35,19 @@
 (setq evil-vsplit-window-right t)
 (setq evil-flash-timer nil)
 (setq evil-complete-all-buffers nil)
-
 (require 'evil)
 (evil-mode 1)
 (evil-set-initial-state 'messages-buffer-mode 'normal)
 
 ;;;;;; evil-collection
 (aar/maybe-install-package 'evil-collection)
-
 (setq evil-collection-outline-bind-tab-p nil)
 (setq evil-collection-company-use-tng t)
 (setq evil-collection-want-unimpaired-p nil)
-
-(require 'evil-collection)
 (evil-collection-init)
 
 ;;;;;; evil-traces
 (aar/maybe-install-package 'evil-traces)
-
 (require 'evil-traces)
 (evil-traces-use-diff-faces)
 (evil-traces-mode)
@@ -163,34 +155,23 @@
   (kbd aar/leader-alt-key) aar/leader-map)
 
 ;;;;;; Some basic <leader> keybindings
-(evil-define-key nil aar/leader-map
-  (kbd ":")   #'pp-eval-expression
-  (kbd ";")   #'execute-extended-command
-  (kbd "&")   #'async-shell-command
-  (kbd "u")   #'universal-argument)
+(define-key aar/leader-map (kbd ":") #'pp-eval-expression)
+(define-key aar/leader-map (kbd ";") #'execute-extended-command)
+(define-key aar/leader-map (kbd "&") #'async-shell-command)
+(define-key aar/leader-map (kbd "u") #'universal-argument)
 
 ;;;;;; <leader> bindings for managing windows
-(evil-define-key nil aar/leader-map
-  (kbd "w") 'evil-window-map)
+(define-key aar/leader-map (kbd "w") 'evil-window-map)
 
-(evil-define-key nil evil-window-map
-  (kbd "C-h") #'evil-window-left
-  (kbd "C-j") #'evil-window-down
-  (kbd "C-k") #'evil-window-up
-  (kbd "C-l") #'evil-window-right
-  (kbd "C-q") #'evil-quit
-  (kbd "d")   #'evil-quit
-  (kbd "x")   #'kill-buffer-and-window
-  (kbd "f")   #'ffap-other-window
-  (kbd "C-f") #'ffap-other-window)
-
-;;;;;; Create <leader> prefix keys and keymaps
-(defun aar/leader-bind-key-and-map (keyval name)
-  (let* ((map-name (concat "aar/leader-" name "-map"))
-         (map-symb (intern map-name)))
-    (define-prefix-command map-symb)
-    (define-key aar/leader-map (kbd keyval) map-symb)
-    (which-key-add-keymap-based-replacements aar/leader-map keyval name)))
+(define-key evil-window-map (kbd "C-h") #'evil-window-left)
+(define-key evil-window-map (kbd "C-j") #'evil-window-down)
+(define-key evil-window-map (kbd "C-k") #'evil-window-up)
+(define-key evil-window-map (kbd "C-l") #'evil-window-right)
+(define-key evil-window-map (kbd "C-q") #'evil-quit)
+(define-key evil-window-map (kbd "d")   #'evil-quit)
+(define-key evil-window-map (kbd "x")   #'kill-buffer-and-window)
+(define-key evil-window-map (kbd "f")   #'ffap-other-window)
+(define-key evil-window-map (kbd "C-f") #'ffap-other-window)
 
 (provide 'aar-keybindings)
 ;;; aar-keybindings.el ends here
