@@ -92,6 +92,7 @@
 (require 'aar-apps)
 
 (require 'aar-config-langs)
+(require 'aar-ess)
 
 (provide 'init)
 ;;; init.el ends here
