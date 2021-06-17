@@ -91,5 +91,7 @@
 (require 'aar-spelling)
 (require 'aar-apps)
 
+(require 'aar-config-langs)
+
 (provide 'init)
 ;;; init.el ends here
