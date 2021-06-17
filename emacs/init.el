@@ -87,6 +87,7 @@
 (require 'aar-editor)
 (require 'aar-search)
 (require 'aar-code)
+(require 'aar-project-vc)
 
 (provide 'init)
 ;;; init.el ends here
