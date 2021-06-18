@@ -18,6 +18,7 @@
 
 (defun aar/maybe-install-package (pkg)
   (unless (package-installed-p pkg)
+    (package-refresh-contents)
     (package-install pkg)))
 
 (provide 'aar-packages)
