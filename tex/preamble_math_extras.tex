@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Format equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Display breaks in equations in articles
+\allowdisplaybreaks
+
+% Control equation numbering
+\numberwithin{equation}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Various theorem environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Unnumbered
+\theoremstyle{definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{intuition*}{Intuition}
+\newtheorem*{assumption*}{Assumption}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{example*}{Example}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem*{solution}{Solution}
+\newtheorem*{justification}{Justification}
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{claim*}{Claim}
+
+% Numbered but not by Section
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+\newtheorem{intuit}{Intuition}
+\newtheorem{asm}{Assumption}
+\newtheorem{rmk}{Remark}
+\newtheorem{exm}{Example}
+\newtheorem{exc}{Exercise}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{prp}{Proposition}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+
+% Numbered by Section
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{intuition}{Intuition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{exercise}{Exercise}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conjecture}{Conjecture}[section]

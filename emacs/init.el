@@ -96,5 +96,7 @@
 (require 'aar-julia)
 (require 'aar-python)
 
+(require 'aar-latex)
+
 (provide 'init)
 ;;; init.el ends here
