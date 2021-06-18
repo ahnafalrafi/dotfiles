@@ -93,6 +93,7 @@
 
 (require 'aar-config-langs)
 (require 'aar-ess)
+(require 'aar-julia)
 
 (provide 'init)
 ;;; init.el ends here
