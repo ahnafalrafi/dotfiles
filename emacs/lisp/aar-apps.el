@@ -81,9 +81,13 @@ method to prepare vterm at the corresponding remote directory."
 (setq-default pdf-view-display-size 'fit-width
               pdf-view-resize-factor 1.05)
 (push 'pdf-view-mode evil-snipe-disabled-modes)
-(add-hook 'pdf-view-mode-hook
-          (lambda ()
-            (setq-local evil-normal-state-cursor (list nil))))
+
+(defun aar/pdf-view-mode-h ()
+  (setq-local evil-normal-state-cursor (list nil))
+  (pdf-sync-minor-mode)
+  (pdf-links-minor-mode))
+
+(add-hook 'pdf-view-mode-hook #'aar/pdf-view-mode-h)
 
 ;; On scroll, move to beginning of page.
 (advice-add #'pdf-view-previous-page-command :after #'image-bob)
