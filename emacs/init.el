@@ -97,6 +97,7 @@
 (require 'aar-python)
 
 (require 'aar-latex)
+(require 'aar-markdown)
 
 (provide 'init)
 ;;; init.el ends here
