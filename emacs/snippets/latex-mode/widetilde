@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: widetilde
+# key: wt
+# condition: t
+# --
+\widetilde{`%`$1}$0

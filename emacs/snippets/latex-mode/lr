@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: left and right
+# uuid: lr
+# key: lr
+# condition: t
+# --
+\left${1:(} `%`$0 \right${2:)}

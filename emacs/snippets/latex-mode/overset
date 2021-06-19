@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: overset
+# uuid: ovs
+# key: ovs
+# condition: t
+# --
+\overset{$1}{`%`$2} $0

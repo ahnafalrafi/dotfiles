@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: textbf
+# uuid: tbf
+# key: tbf
+# condition: t
+# --
+\textbf{`%`$1}$0

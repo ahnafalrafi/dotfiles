@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: liminf
+# uuid: liminf
+# key: liminf
+# condition: t
+# --
+\liminf_{${1:n} \to ${2:\infty}} `%`$0

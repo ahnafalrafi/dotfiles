@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathcal
+# uuid: cal
+# key: cal
+# condition: t
+# --
+\mathcal{`%`$1}$0

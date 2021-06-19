@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: limsup
+# uuid: limsup
+# key: limsup
+# condition: t
+# --
+\limsup_{${1:n} \to ${2:\infty}} `%`$0

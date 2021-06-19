@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: underline
+# key: unl
+# condition: t
+# --
+\underline{`%`$1}$0

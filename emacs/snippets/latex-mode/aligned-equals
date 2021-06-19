@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: aligned equals
+# key: ==
+# condition: t
+# --
+= & \ $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: overline
+# key: ovl
+# condition: t
+# --
+\overline{`%`$1}$0

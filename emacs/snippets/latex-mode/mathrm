@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathrm
+# uuid: rm
+# key: rm
+# condition: t
+# --
+\mathrm{`%`$1}$0

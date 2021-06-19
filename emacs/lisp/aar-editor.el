@@ -50,6 +50,8 @@
 (aar/maybe-install-package 'yasnippet)
 (setq yas-indent-line 'auto)
 (require 'yasnippet)
+(add-to-list 'yas-snippet-dirs (expand-file-name "snippets/"
+                                                 user-emacs-directory))
 (yas-global-mode t)
 (defvaralias '% 'yas-selected-text)
 

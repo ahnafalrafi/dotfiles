@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: while ... ... end
+# key: while
+# --
+while ${1:cond}
+    ${2:body}
+end
+$0

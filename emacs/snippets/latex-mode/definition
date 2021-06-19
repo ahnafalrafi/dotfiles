@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: definition
+# key: def
+# group: theorems
+# condition: t
+# --
+\begin{definition}${1:[${2:name}]}${3:\label{def:$4}}
+`%`$0
+\end{definition}

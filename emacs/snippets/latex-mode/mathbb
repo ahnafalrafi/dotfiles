@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathbb
+# uuid: bb
+# key: bb
+# condition: t
+# --
+\mathbb{`%`$1}$0

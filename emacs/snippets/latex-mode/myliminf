@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: myliminf
+# uuid: limi
+# key: limi
+# condition: t                                      
+# --
+\lim_{${1:n} \to ${2:\infty}} \inf_{${3:m} \geq $1} `%`$0

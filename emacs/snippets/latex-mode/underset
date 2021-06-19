@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: underset
+# key: uns
+# condition: t
+# --
+\underset{$1}{`%`$2} $0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: widehat
+# key: wh
+# condition: t
+# --
+\widehat{`%`$1}$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: theorem
+# key: thm
+# group: theorems
+# condition: t
+# --
+\begin{theorem}${1:[${2:name}]}${3:\label{thm:$4}}
+`%`$0
+\end{theorem}

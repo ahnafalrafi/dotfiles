@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jupyter-python-cell
+# key: cell
+# --
+#+begin_src jupyter-python :results silent
+$0
+#+end_src

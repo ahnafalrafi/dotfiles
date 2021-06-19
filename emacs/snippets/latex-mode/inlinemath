@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: inline math
+# uuid: ilm
+# key: ilm
+# condition: t
+# --
+\\(`%`$0\\)

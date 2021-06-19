@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathbf
+# uuid: bf
+# key: bf
+# condition: t
+# --
+\mathbf{`%`$1}$0
