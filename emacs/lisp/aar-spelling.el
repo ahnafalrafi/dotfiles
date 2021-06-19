@@ -6,15 +6,17 @@
 
 ;;; ispell
 (setq ispell-dictionary "english")
-(setq ispell-personal-dictionary (expand-file-name "ispell_personal"
-                                                   "~/Dropbox/configfiles/emacs-etc/"))
+
+;; Let no-littering handle dictionary location
+(setq ispell-personal-dictionary (no-littering-expand-etc-file-name
+                                  "ispell_personal"))
 (setq ispell-local-dictionary-alist `((nil "[[:alpha:]]" "[^[:alpha:]]"
                                            "['\x2019]" nil ("-B") nil utf-8)))
 (global-set-key [remap ispell-word] #'aar/spell-correct)
 
 ;;; spell-fu
 (aar/maybe-install-package 'spell-fu)
-(setq spell-fu-directory (concat "~/Dropbox/configfiles/emacs-etc/" "spell-fu"))
+(setq spell-fu-directory (no-littering-expand-etc-file-name "spell-fu"))
 
 (evil-define-key 'normal 'global
   (kbd "z g") #'spell-fu-word-add
@@ -22,60 +24,6 @@
   (kbd "] s") #'spell-fu-goto-next-error)
 
 (add-hook 'text-mode-hook #'spell-fu-mode)
-
-(defvar aar/spell-faces-exclude-alist
-  '((markdown-mode
-     . (markdown-code-face
-        font-lock-keyword-face
-        markdown-html-attr-name-face
-        markdown-html-attr-value-face
-        markdown-html-tag-name-face
-        markdown-link-face
-        markdown-markup-face
-        markdown-reference-face
-        markdown-url-face))
-    (org-mode
-     . (org-block
-        org-block-begin-line
-        org-block-end-line
-        org-code
-        font-lock-keyword-face
-        org-date
-        org-formula
-        org-latex-and-related
-        org-link
-        org-meta-line
-        org-property-value
-        org-ref-cite-face
-        org-special-keyword
-        org-tag
-        org-todo
-        org-todo-keyword-done
-        org-todo-keyword-habt
-        org-todo-keyword-kill
-        org-todo-keyword-outd
-        org-todo-keyword-todo
-        org-todo-keyword-wait
-        org-verbatim))
-    (latex-mode
-     . (font-latex-math-face
-        font-latex-sedate-face
-        font-latex-warning-face
-        font-lock-function-name-face
-        font-lock-keyword-face
-        font-lock-constant-face
-        font-lock-variable-name-face
-        button)))
-  "Faces in certain major modes that spell-fu will not spellcheck.")
-
-(add-hook 'spell-fu-mode #'aar/spell-init-exluded-faces-h)
-
-;;;###autoload
-(defun aar/spell-init-exluded-faces-h ()
-  "Set `spell-fu-faces-exclude' using `aar/spell-faces-exclude-alist'."
-  (when-let (excluded (alist-get major-mode
-                                 aar/spell-faces-exclude-alist))
-    (setq-local spell-fu-faces-exclude excluded)))
 
 ;;; Minibuffer spelling correction completion functions
 ;;;###autoload

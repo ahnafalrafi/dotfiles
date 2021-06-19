@@ -36,6 +36,14 @@
 
 (defun aar/LaTeX-mode-settings-h ()
   (setq-local preivew-scale-function 1.25)
+  (setq-local spell-fu-faces-exclude '(font-latex-math-face
+                                       font-latex-sedate-face
+                                       font-latex-warning-face
+                                       font-lock-function-name-face
+                                       font-lock-keyword-face
+                                       font-lock-constant-face
+                                       font-lock-variable-name-face
+                                       button))
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
