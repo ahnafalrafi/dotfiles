@@ -98,6 +98,7 @@
 
 (require 'aar-latex)
 (require 'aar-markdown)
+(require 'aar-org)
 
 (provide 'init)
 ;;; init.el ends here
