@@ -76,7 +76,7 @@ method to prepare vterm at the corresponding remote directory."
 
 ;;; pdf-tools
 (aar/maybe-install-package 'pdf-tools)
-(require 'pdf-tools)
+(pdf-loader-install)
 (add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
 (setq-default pdf-view-display-size 'fit-width
               pdf-view-resize-factor 1.05)
