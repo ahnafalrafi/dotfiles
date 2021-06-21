@@ -19,7 +19,8 @@
 (defun aar/maybe-install-package (pkg)
   (unless (package-installed-p pkg)
     (package-refresh-contents)
-    (package-install pkg)))
+    (package-install pkg))
+  (add-to-list 'package-selected-packages pkg 'append))
 
 (provide 'aar-packages)
 ;;; aar-packages.el ends here
