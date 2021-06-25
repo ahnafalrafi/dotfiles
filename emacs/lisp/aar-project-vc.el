@@ -4,6 +4,21 @@
 
 ;;; Code:
 
+;;; project.el
+;; Adapted from Manuel Uberti's config.
+;; Declare directories with ".project" as a project
+(cl-defmethod project-root ((project (head local)))
+  (cdr project))
+
+(defun aar/project-try-local (dir)
+  "Determine if DIR is a non-Git project.
+DIR must include a .project file to be considered a project."
+  (let ((root (locate-dominating-file dir ".project")))
+    (and root (cons 'local root))))
+
+(with-eval-after-load 'project
+  (add-to-list 'project-find-functions 'aar/project-try-local))
+
 ;;; <leader> project map
 (define-key aar/leader-map (kbd "SPC") #'project-find-file)
 (define-key aar/leader-map (kbd "p")   project-prefix-map)
