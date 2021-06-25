@@ -104,7 +104,7 @@ the minibuffer prompt."
 (require 'recentf)
 (setq recentf-max-saved-items 50)
 (setq recentf-max-menu-items 15)
-(setq recentf-auto-cleanup 'never)
+(setq recentf-auto-cleanup (if (daemonp) 300))
 (add-to-list 'recentf-exclude no-littering-var-directory)
 (add-to-list 'recentf-exclude no-littering-etc-directory)
 (recentf-mode t)
