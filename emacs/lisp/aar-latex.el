@@ -27,6 +27,7 @@
                            LaTeX-section-label))
 (setq LaTeX-fill-break-at-separators nil)
 (setq LaTeX-item-indent 0)
+(setq preview-scale-function 1.25)
 (setq font-latex-fontify-script nil)
 (setq font-latex-fontify-sectioning 'color)
 (with-eval-after-load 'font-latex
@@ -42,11 +43,29 @@
 (evil-define-key '(insert emacs) LaTeX-mode-map
   (kbd aar/localleader-alt-key) 'aar/localleader-LaTeX-mode-map)
 
-(define-key aar/localleader-LaTeX-mode-map (kbd "a")     #'TeX-command-run-all)
-(define-key aar/localleader-LaTeX-mode-map (kbd "v")     #'TeX-view)
-(define-key aar/localleader-LaTeX-mode-map (kbd "c")     #'TeX-clean)
-(define-key aar/localleader-LaTeX-mode-map (kbd "p b")   #'preview-buffer)
-(define-key aar/localleader-LaTeX-mode-map (kbd "p c b") #'preview-clearout-buffer)
+(define-key aar/localleader-LaTeX-mode-map (kbd "a") #'TeX-command-run-all)
+(define-key aar/localleader-LaTeX-mode-map (kbd "v") #'TeX-view)
+(define-key aar/localleader-LaTeX-mode-map (kbd "c") #'TeX-clean)
+
+;; previews
+(define-prefix-command 'aar/LaTeX-preview-map)
+(define-key aar/localleader-LaTeX-mode-map (kbd "p") 'aar/LaTeX-preview-map)
+
+(define-key aar/LaTeX-preview-map (kbd "b")   #'preview-buffer)
+(define-key aar/LaTeX-preview-map (kbd "c b") #'preview-clearout-buffer)
+(define-key aar/LaTeX-preview-map (kbd "d")   #'preview-document)
+(define-key aar/LaTeX-preview-map (kbd "c d") #'preview-clearout-document)
+(define-key aar/LaTeX-preview-map (kbd "e")   #'preview-environment)
+(define-key aar/LaTeX-preview-map (kbd "p")   #'preview-at-point)
+(define-key aar/LaTeX-preview-map (kbd "c p") #'preview-clearout-at-point)
+(define-key aar/LaTeX-preview-map (kbd "r")   #'preview-region)
+(define-key aar/LaTeX-preview-map (kbd "c r") #'preview-clearout)
+(define-key aar/LaTeX-preview-map (kbd "s")   #'preview-section)
+(define-key aar/LaTeX-preview-map (kbd "c s") #'preview-clearout-section)
+(define-key aar/LaTeX-preview-map (kbd "f")   #'preview-cache-preamble)
+(define-key aar/LaTeX-preview-map (kbd "c f") #'preview-cache-preamble-off)
+(define-key aar/LaTeX-preview-map (kbd "w")   #'preview-copy-region-as-mml)
+(define-key aar/LaTeX-preview-map (kbd "TAB") #'preview-goto-info-page)
 
 ;;; auctex-latexmk
 (aar/maybe-install-package 'auctex-latexmk)
@@ -81,7 +100,6 @@
 ;;; Hook for tex modes
 (defun aar/latex-mode-h ()
   (setq-local fill-nobreak-predicate nil)
-  (setq-local preivew-scale-function 1.25)
   (setq-local spell-fu-faces-exclude '(font-lock-function-name-face
                                        font-lock-keyword-face
                                        font-lock-constant-face
@@ -90,7 +108,6 @@
                                        font-latex-sedate-face
                                        font-latex-warning-face
                                        button))
-
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
@@ -100,7 +117,7 @@
   (reftex-mode)
   (eglot-ensure))
 
-(add-hook 'LaTeX-mode-hook #'aar/latex-mode-h)
+(add-hook 'TeX-mode-hook #'aar/latex-mode-h)
 
 (provide 'aar-latex)
 ;;; aar-latex.el ends here
