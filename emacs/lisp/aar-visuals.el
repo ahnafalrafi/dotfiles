@@ -22,6 +22,7 @@
 (setq modus-themes-org-blocks 'grayscale)
 (setq modus-themes-no-mixed-fonts t)
 (load-theme 'modus-vivendi t)
+(define-key aar/leader-map (kbd "t t") #'load-theme)
 
 ;;; Icons
 (aar/maybe-install-package 'all-the-icons)
