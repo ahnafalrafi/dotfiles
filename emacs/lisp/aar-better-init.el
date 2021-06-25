@@ -25,5 +25,28 @@
 ;; Set file for custom.el to use
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 
+;;; Dashboard
+(aar/maybe-install-package 'page-break-lines)
+(aar/maybe-install-package 'dashboard)
+
+(setq dashboard-set-heading-icons nil)
+(setq dashboard-set-file-icons nil)
+(setq dashboard-set-navigator nil)
+(setq dashboard-set-init-info t)
+(setq dashboard-set-footer nil)
+(setq dashboard-banner-logo-title "Hi Ahnaf, welcome to Emacs")
+(setq dashboard-startup-banner 'logo)
+(setq dashboard-center-content nil)
+(setq dashboard-projects-backend 'project-el)
+(setq dashboard-items '((recents  . 10)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5)
+                        (registers . 5)))
+(setq initial-buffer-choice (lambda ()
+                              (get-buffer "*dashboard*")))
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+
 (provide 'aar-better-init)
 ;;; aar-better-init.el ends here
