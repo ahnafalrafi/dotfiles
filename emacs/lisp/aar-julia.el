@@ -6,7 +6,6 @@
 
 ;;; julia-mode
 (aar/maybe-install-package 'julia-mode)
-(require 'julia-mode)
 
 ;;; <localleader> map for julia
 (define-prefix-command 'aar/localleader-julia-mode-map)
@@ -72,15 +71,16 @@ available."
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                ;; function instead of strings to find project dir at runtime
-               `(julia-mode . ("julia"
-                               ,(concat "--project="
-                                        eglot-julia-language-server-project)
-                               ,@eglot-julia-flags
-                               ,eglot-julia-language-server-script))))
+               `((julia-mode ess-julia-mode)
+                 .
+                 ("julia"
+                  ,(concat "--project=" eglot-julia-language-server-project)
+                  ,@eglot-julia-flags
+                  ,eglot-julia-language-server-script))))
+
 ;;; julia hook function
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
-  (tree-sitter-mode)
   (setq-local eglot-connect-timeout 300)
   (eglot-ensure))
 
