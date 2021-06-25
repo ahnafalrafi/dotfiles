@@ -93,17 +93,17 @@ method to prepare vterm at the corresponding remote directory."
 (advice-add #'pdf-view-previous-page-command :after #'image-bob)
 (advice-add #'pdf-view-next-page-command :after #'image-bob)
 
-(evil-define-key 'normal pdf-view-mode-map
-    (kbd "s")     #'pdf-view-fit-width-to-window
-    (kbd "a")     #'pdf-view-fit-height-to-window
-    (kbd "H")     #'image-bob
-    (kbd "J")     #'pdf-view-next-page-command
-    (kbd "K")     #'pdf-view-previous-page-command
-    (kbd "L")     #'image-eob
-    (kbd "o")     #'pdf-outline
-    (kbd "TAB")   #'pdf-outline
-    (kbd "<tab>") #'pdf-outline
-    (kbd "C-r")   #'pdf-view-midnight-minor-mode)
+(evil-define-key 'normal 'pdf-view-mode-map
+  (kbd "s")     #'pdf-view-fit-width-to-window
+  (kbd "a")     #'pdf-view-fit-height-to-window
+  (kbd "H")     #'image-bob
+  (kbd "J")     #'pdf-view-next-page-command
+  (kbd "K")     #'pdf-view-previous-page-command
+  (kbd "L")     #'image-eob
+  (kbd "o")     #'pdf-outline
+  (kbd "TAB")   #'pdf-outline
+  (kbd "<tab>") #'pdf-outline
+  (kbd "C-r")   #'pdf-view-midnight-minor-mode)
 
 (if (fboundp 'doom-modeline-def-modeline)
     (doom-modeline-def-modeline 'pdf
