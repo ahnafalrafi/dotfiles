@@ -25,7 +25,22 @@
 (with-eval-after-load 'julia-repl
   (julia-repl-set-terminal-backend 'vterm))
 
-;;; eglot configuration - shamelessly stolen from eglot-jl
+;;; project.el integration - shamelessly stolen from eglot-jl
+;; Make project.el aware of Julia projects
+(defun aar/project-try-julia (dir)
+  "Return project instance if DIR is part of a julia project.
+Otherwise returns nil"
+  (let ((root (or (locate-dominating-file dir "JuliaProject.toml")
+                  (locate-dominating-file dir "Project.toml"))))
+    (and root (cons 'julia root))))
+
+(cl-defmethod project-roots ((project (head julia)))
+  (list (cdr project)))
+
+(with-eval-after-load 'project
+  (add-to-list 'project-find-functions 'aar/project-try-julia))
+
+;;; eglot configuration - also obviously shamelessly stolen from eglot-jl
 (defgroup eglot-julia nil
   "Interaction with LanguageServer.jl LSP server via eglot"
   :prefix "eglot-julia-"
