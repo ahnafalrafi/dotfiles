@@ -46,6 +46,13 @@
 (setq initial-buffer-choice (lambda ()
                               (get-buffer "*dashboard*")))
 (require 'dashboard)
+
+;; Hooks for dashboard-mode
+(defun aar/dashboard-h ()
+  (setq-local show-trailing-whitespace nil))
+
+(add-hook 'dashboard-mode-hook #'aar/dashboard-h)
+
 (dashboard-setup-startup-hook)
 
 (provide 'aar-better-init)
