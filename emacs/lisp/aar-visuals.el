@@ -5,9 +5,9 @@
 ;;; Code:
 
 ;;; Font
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10")
-(set-frame-font "JetBrainsMono Nerd Font-10" nil t)
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10"))
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10.5")
+(set-frame-font "JetBrainsMono Nerd Font-10.5" nil t)
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10.5"))
 
 ;;; Display line numbers
 (setq display-line-numbers-type 'visual)
