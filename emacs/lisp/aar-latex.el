@@ -107,7 +107,8 @@
                                        font-latex-math-face
                                        font-latex-sedate-face
                                        font-latex-warning-face
-                                       button))
+                                       button
+                                       eglot-highlight-symbol-face))
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
