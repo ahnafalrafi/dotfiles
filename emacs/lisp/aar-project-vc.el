@@ -42,6 +42,7 @@ DIR must include a .project file to be considered a project."
 (which-key-add-keymap-based-replacements aar/leader-map "g" "git")
 
 (define-key aar/leader-git-map (kbd "g") #'magit-status)
+(define-key aar/leader-git-map (kbd "i") #'magit-init)
 
 (provide 'aar-project-vc)
 ;;; aar-project-vc.el ends here
