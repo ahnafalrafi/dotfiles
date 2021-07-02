@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+aar_emacs_cmd='emacsclient -n -s aar-emacs'
+frame_exists=$($aar_emacs_cmd -e "(if (> (length (frame-list)) 1) 't)")
+
+if [ "$frame_exists" = "nil" ]; then
+  $aar_emacs_cmd -c $*
+elif [ $# -eq 0 ]; then
+  wmctrl -a 'AAR Daemacs'
+else
+  $aar_emacs_cmd $*
+fi
