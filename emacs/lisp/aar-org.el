@@ -174,20 +174,15 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 
 (with-eval-after-load 'ox-latex
   ;; Configuration
-  (setq org-latex-listings t
-        org-latex-packages-alist '(("" "listings")
-                                   ("" "xcolor"))
-        org-latex-listings-langs '((jupyter-python "Python")
+  (setq org-latex-listings t)
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "xcolor"))
+
+  (setq org-latex-listings-langs '((jupyter-python "Python")
                                    (emacs-lisp "common-lisp")
                                    (elisp "common-lisp")
                                    (cc "c++")
-                                   (shell-script "bash"))
-        org-latex-pdf-process '((concat "latexmk"
-                                        " -shell-escape"
-                                        " -interaction=nonstopmode"
-                                        " -bibtex"
-                                        " -f -pdf"
-                                        " -output-directory=%o %f")))
+                                   (shell-script "bash")))
 
   (add-to-list 'org-latex-classes
                '("book-noparts"
