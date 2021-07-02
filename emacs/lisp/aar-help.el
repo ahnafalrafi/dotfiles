@@ -18,5 +18,11 @@
 (global-set-key [remap describe-variable] #'helpful-variable)
 (global-set-key [remap describe-symbol]   #'helpful-symbol)
 
+;;; info
+(add-hook
+ 'Info-mode-hook
+ (lambda ()
+   (setq-local show-trailing-whitespace nil)))
+
 (provide 'aar-help)
 ;;; aar-help.el ends here

@@ -16,5 +16,11 @@
 (load "ess-autoloads")
 (add-to-list 'auto-mode-alist '("\\.R\\'" . ess-r-mode))
 
+;;; Inferior ess repl hooks
+(defun aar/ess-inferior-mode-h ()
+  (setq-local show-trailing-whitespace nil))
+
+(add-hook 'inferior-ess-mode-hook #'aar/ess-inferior-mode-h)
+
 (provide 'aar-ess)
 ;;; aar-ess.el ends here
