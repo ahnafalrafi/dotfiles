@@ -84,31 +84,54 @@ method to prepare vterm at the corresponding remote directory."
 
 (defun aar/pdf-view-mode-h ()
   (setq-local evil-normal-state-cursor (list nil))
-  (pdf-sync-minor-mode)
-  (pdf-links-minor-mode))
+  (pdf-links-minor-mode)
+  (pdf-sync-minor-mode))
 
 (add-hook 'pdf-view-mode-hook #'aar/pdf-view-mode-h)
+
+;; Adjust load order for keybindings with evil-collection
+(with-eval-after-load 'evil-collection
+  (delete '(pdf pdf-view) evil-collection-mode-list))
+
+(with-eval-after-load 'pdf-tools
+  (evil-collection-pdf-setup)
+
+  (evil-define-key 'normal pdf-view-mode-map
+    (kbd "s")  nil
+    (kbd "sb") nil
+    (kbd "sm") nil
+    (kbd "sr") nil)
+
+  (evil-define-key 'normal pdf-view-mode-map
+    (kbd "s")     #'pdf-view-fit-width-to-window
+    (kbd "a")     #'pdf-view-fit-height-to-window
+    (kbd "H")     #'image-bob
+    (kbd "J")     #'pdf-view-next-page-command
+    (kbd "K")     #'pdf-view-previous-page-command
+    (kbd "L")     #'image-eob
+    (kbd "o")     #'pdf-outline
+    (kbd "TAB")   #'pdf-outline
+    (kbd "<tab>") #'pdf-outline
+    (kbd "C-r")   #'pdf-view-midnight-minor-mode))
 
 ;; On scroll, move to beginning of page.
 (advice-add #'pdf-view-previous-page-command :after #'image-bob)
 (advice-add #'pdf-view-next-page-command :after #'image-bob)
 
-(evil-define-key 'normal 'pdf-view-mode-map
-  (kbd "s")     #'pdf-view-fit-width-to-window
-  (kbd "a")     #'pdf-view-fit-height-to-window
-  (kbd "H")     #'image-bob
-  (kbd "J")     #'pdf-view-next-page-command
-  (kbd "K")     #'pdf-view-previous-page-command
-  (kbd "L")     #'image-eob
-  (kbd "o")     #'pdf-outline
-  (kbd "TAB")   #'pdf-outline
-  (kbd "<tab>") #'pdf-outline
-  (kbd "C-r")   #'pdf-view-midnight-minor-mode)
-
 (if (fboundp 'doom-modeline-def-modeline)
     (doom-modeline-def-modeline 'pdf
       '(bar window-number matches pdf-pages buffer-info)
       '(misc-info major-mode process vcs)))
+
+;;; ebib
+(aar/maybe-install-package 'ebib)
+(setq ebib-bibtex-dialect 'biblatex)
+(setq ebib-file-associations nil)
+
+(defun aar/ebib-entry-mode-h ()
+  (setq-local show-trailing-whitespace nil))
+
+(add-hook 'ebib-entry-mode-hook #'aar/ebib-entry-mode-h)
 
 (provide 'aar-apps)
 ;;; aar-apps.el ends here
