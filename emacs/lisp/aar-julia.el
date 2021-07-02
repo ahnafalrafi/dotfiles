@@ -14,12 +14,23 @@
 (evil-define-key '(insert emacs) julia-mode-map
   (kbd aar/localleader-alt-key) 'aar/localleader-julia-mode-map)
 
+;;; ess-julia-mode
+(add-to-list 'auto-mode-alist '("\\.jl\\'" . ess-julia-mode))
+
+(with-eval-after-load 'ess-julia
+  (evil-define-key '(normal visual motion) ess-julia-mode-map
+    (kbd aar/localleader-key) 'aar/localleader-julia-mode-map)
+  (evil-define-key '(insert emacs) ess-julia-mode-map
+    (kbd aar/localleader-alt-key) 'aar/localleader-julia-mode-map)
+
+  (define-key ess-julia-mode-map (kbd "TAB") #'julia-latexsub-or-indent))
+
 ;;; julia-repl
 (aar/maybe-install-package 'julia-repl)
-(evil-define-key nil aar/localleader-julia-mode-map
-   (kbd "r") #'julia-repl
-   (kbd "a") #'julia-repl-send-region-or-line
-   (kbd "l") #'julia-repl-send-line)
+(define-key aar/localleader-julia-mode-map (kbd "r") #'julia-repl)
+(define-key aar/localleader-julia-mode-map
+  (kbd "a") #'julia-repl-send-region-or-line)
+(define-key aar/localleader-julia-mode-map (kbd "l") #'julia-repl-send-line)
 
 (with-eval-after-load 'julia-repl
   (julia-repl-set-terminal-backend 'vterm))
@@ -78,13 +89,14 @@ available."
                   ,@eglot-julia-flags
                   ,eglot-julia-language-server-script))))
 
-;;; julia hook function
+;;; julia hook functions
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
   (setq-local eglot-connect-timeout 300)
   (eglot-ensure))
 
-(add-hook 'julia-mode-hook #'aar/julia-mode-h)
+(add-hook 'julia-mode-hook     #'aar/julia-mode-h)
+(add-hook 'ess-julia-mode-hook #'aar/julia-mode-h)
 
 (provide 'aar-julia)
 ;;; aar-julia.el ends here
