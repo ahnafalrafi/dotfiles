@@ -78,6 +78,23 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (evil-define-key '(insert emacs) org-mode-map
   (kbd aar/localleader-alt-key) 'aar/localleader-org-mode-map)
 
+(define-key aar/localleader-org-mode-map (kbd ".") #'consult-outline)
+(define-key aar/localleader-org-mode-map
+  (kbd "l t") #'org-toggle-link-display)
+(define-key aar/localleader-org-mode-map
+  (kbd "l i") #'org-toggle-inline-images)
+(define-key aar/localleader-org-mode-map (kbd "e") #'org-export-dispatch)
+(define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
+
+(evil-define-key '(normal visual motion) org-mode-map
+  (kbd "g h") #'org-up-element
+  (kbd "[ h") #'org-backward-heading-same-level
+  (kbd "] h") #'org-forward-heading-same-level
+  (kbd "[ l") #'org-previous-link
+  (kbd "] l") #'org-next-link
+  (kbd "[ c") #'org-babel-previous-src-block
+  (kbd "] c") #'org-babel-next-src-block)
+
 ;;; Hook for org-mode
 (defun aar/org-mode-h ()
   (setq-local spell-fu-faces-exclude '(org-block
@@ -116,23 +133,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (evil-org-agenda-set-keys)
 
   (toc-org-enable)
-  (turn-on-org-cdlatex)
-
-  (define-key aar/localleader-org-mode-map (kbd ".") #'consult-outline)
-  (define-key aar/localleader-org-mode-map
-    (kbd "l t") #'org-toggle-link-display)
-  (define-key aar/localleader-org-mode-map
-    (kbd "l i") #'org-toggle-inline-images)
-  (define-key aar/localleader-org-mode-map (kbd "e") #'org-export-dispatch)
-  (define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
-
-  (evil-define-key '(normal visual motion) org-mode-map
-    (kbd "[ h") #'org-backward-heading-same-level
-    (kbd "] h") #'org-forward-heading-same-level
-    (kbd "[ l") #'org-previous-link
-    (kbd "] l") #'org-next-link
-    (kbd "[ c") #'org-babel-previous-src-block
-    (kbd "] c") #'org-babel-next-src-block))
+  (turn-on-org-cdlatex))
 
 (add-hook 'org-mode-hook #'aar/org-mode-h)
 (add-hook 'org-tab-first #'aar/org-cycle-only-current-subtree-h)
