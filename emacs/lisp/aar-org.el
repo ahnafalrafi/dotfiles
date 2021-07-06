@@ -87,7 +87,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
 
 (evil-define-key '(normal visual motion) org-mode-map
-  (kbd "g h") #'org-up-element
   (kbd "[ h") #'org-backward-heading-same-level
   (kbd "] h") #'org-forward-heading-same-level
   (kbd "[ l") #'org-previous-link
@@ -124,14 +123,13 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
 
-  (require 'evil-org-mode)
+  (require 'evil-org)
   (setq evil-org-retain-visual-state-on-shift t)
   (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme)
   (evil-org-mode 1)
 
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
-
   (toc-org-enable)
   (turn-on-org-cdlatex))
 
