@@ -159,7 +159,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 
 ;;; with-eval-after-load statements
 (with-eval-after-load 'org
-  (plist-put org-format-latex-options :scale 1.5)
+  (plist-put org-format-latex-options :scale 1.75)
   (plist-put org-format-latex-options :background 'default)
   (org-babel-do-load-languages
    'org-babel-load-languages
