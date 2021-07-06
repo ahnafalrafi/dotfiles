@@ -173,8 +173,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (with-eval-after-load 'ox-latex
   ;; Configuration
   (setq org-latex-listings t)
-  (add-to-list 'org-latex-packages-alist '("" "listings"))
-  (add-to-list 'org-latex-packages-alist '("" "xcolor"))
+  (setq org-latex-hyperref-template nil)
 
   (setq org-latex-listings-langs '((jupyter-python "Python")
                                    (emacs-lisp "common-lisp")
@@ -182,6 +181,15 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                                    (cc "c++")
                                    (shell-script "bash")))
 
+  (add-to-list 'org-latex-classes
+               `("aar-article"
+                 ,(concat "\\documentclass[letterpaper,11pt]{article}\n"
+                          "[NO-DEFAULT-PACKAGES]\n"
+                          ;; "[NO-PACKAGES]\n"
+                          "[EXTRA]")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   (add-to-list 'org-latex-classes
                '("book-noparts"
                  "\\documentclass[11pt]{book}"
@@ -195,7 +203,9 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
-                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+  (setq org-latex-default-class "aar-article"))
 
 (provide 'aar-org)
 ;;; aar-org.el ends here
