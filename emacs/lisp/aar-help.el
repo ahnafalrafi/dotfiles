@@ -18,6 +18,12 @@
 (global-set-key [remap describe-variable] #'helpful-variable)
 (global-set-key [remap describe-symbol]   #'helpful-symbol)
 
+;;; elisp-demos
+(aar/maybe-install-package 'elisp-demos)
+(advice-add 'describe-function-1
+            :after #'elisp-demos-advice-describe-function-1)
+(advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
+
 ;;; info
 (add-hook
  'Info-mode-hook

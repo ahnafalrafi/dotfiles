@@ -36,6 +36,10 @@ DIR must include a .project file to be considered a project."
 (aar/maybe-install-package 'magit)
 (setq magit-completing-read-function #'consult--read)
 
+;;; gitgutter
+(aar/maybe-install-package 'git-gutter)
+(global-git-gutter-mode +1)
+
 ;; A <leader> git map and bindings
 (define-prefix-command 'aar/leader-git-map)
 (define-key aar/leader-map (kbd "g") 'aar/leader-git-map)
