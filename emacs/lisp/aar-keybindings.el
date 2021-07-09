@@ -42,7 +42,6 @@
 ;;;;;; evil-collection
 (aar/maybe-install-package 'evil-collection)
 (setq evil-collection-outline-bind-tab-p nil)
-(setq evil-collection-company-use-tng t)
 (setq evil-collection-want-unimpaired-p nil)
 (add-hook 'emacs-startup-hook #'evil-collection-init)
 

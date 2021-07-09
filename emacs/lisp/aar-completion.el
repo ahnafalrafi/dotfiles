@@ -76,8 +76,10 @@
 (setq company-tooltip-align-annotations t)
 (setq company-transformers '(company-sort-by-backend-importance))
 
-(add-hook 'prog-mode-hook #'company-mode)
-(add-hook 'text-mode-hook #'company-mode)
+;; (dolist (hook '(prog-mode-hook text-mode-hook))
+;;   (add-hook hook #'company-mode))
+(add-hook 'after-init-hook #'global-company-mode)
+(add-hook 'after-init-hook #'company-tng-mode)
 
 (provide 'aar-completion)
 ;;; aar-completion.el ends here
