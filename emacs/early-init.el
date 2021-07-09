@@ -50,7 +50,7 @@ Used for files that change often. Must end with a slash.")
 
 (defun aar/expand-etc-file-name (file)
   "Expand filename FILE relative to `aar/etc-dir'."
-  (expand-file-name (convert-standard-filename file) aar/cache-dir))
+  (expand-file-name (convert-standard-filename file) aar/etc-dir))
 
 (defun aar/expand-cache-file-name (file)
   "Expand filename FILE relative to `aar/cache-dir'."
