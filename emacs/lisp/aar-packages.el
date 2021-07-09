@@ -8,7 +8,11 @@
 (when (boundp 'comp-async-report-warnings-errors)
   (setq comp-async-report-warnings-errors nil))
 
-;;; Initialize package sources
+;; Enable native compilation of packages when it's available
+(when (featurep 'native-compile)
+  (setq package-native-compile t))
+
+;; Initialize package sources
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
