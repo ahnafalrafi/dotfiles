@@ -4,9 +4,8 @@
 
 ;;; Code:
 
-;;; native-comp
-(when (boundp 'comp-async-report-warnings-errors)
-  (setq comp-async-report-warnings-errors nil))
+;; Set up directory for package.el
+(setq package-user-dir (aar/expand-cache-file-name "elpa"))
 
 ;; Enable native compilation of packages when it's available
 (when (featurep 'native-compile)
@@ -45,10 +44,15 @@ not prevent downloading the actual packages (obviously)."
       (package-menu-mark-upgrades)
       (package-menu-execute 'noquery))))
 
-;;; vendor-lisp: Packages from non-(M)ELPA sources
+;; vendor-lisp: Packages from non-(M)ELPA sources
 (defconst aar/vendor-lisp-dir
-  (expand-file-name "vendor-lisp/" user-emacs-directory)
+  (aar/expand-cache-file-name "vendor-lisp/")
   "Directory containing lisp files from non-(M)ELPA sources.")
+
+(unless (file-directory-p aar/vendor-lisp-dir)
+    (make-directory aar/vendor-lisp-dir))
+
+;; TODO: add API to use with `aar/maybe-install-package'
 
 (provide 'aar-packages)
 ;;; aar-packages.el ends here

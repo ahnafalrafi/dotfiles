@@ -11,6 +11,7 @@
 
 ;;; savehist-mode: persist history over Emacs restarts.
 ;; Vertico sorts by history position.
+(setq savehist-file (aar/expand-cache-file-name "savehist.el"))
 (setq savehist-save-minibuffer-history t)
 (savehist-mode)
 

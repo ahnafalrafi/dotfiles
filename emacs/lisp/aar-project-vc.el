@@ -5,6 +5,8 @@
 ;;; Code:
 
 ;;; project.el
+(setq project-list-file (aar/expand-etc-file-name "project-list.el"))
+
 ;; Adapted from Manuel Uberti's config.
 ;; Declare directories with ".project" as a project
 (cl-defmethod project-root ((project (head local)))

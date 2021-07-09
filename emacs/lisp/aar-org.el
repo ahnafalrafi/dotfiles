@@ -17,8 +17,8 @@
 (setq org-startup-indented nil)
 (setq org-adapt-indentation nil)
 (setq org-hide-leading-stars nil)
-(setq org-preview-latex-image-directory
-      (no-littering-expand-var-file-name "org-latex-previews/"))
+(setq org-preview-latex-image-directory (aar/expand-cache-file-name
+                                         "org-latex-previews/"))
 (setq org-latex-prefer-user-labels t)
 (setq org-src-preserve-indentation t)
 (setq org-src-fontify-natively t)

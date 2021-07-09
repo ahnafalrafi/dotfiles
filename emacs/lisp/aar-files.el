@@ -102,11 +102,12 @@ the minibuffer prompt."
 
 ;;; recentf
 (require 'recentf)
+(setq recentf-save-file (aar/expand-cache-file-name "recentf-save.el"))
 (setq recentf-max-saved-items 50)
 (setq recentf-max-menu-items 15)
 (setq recentf-auto-cleanup (if (daemonp) 300))
-(add-to-list 'recentf-exclude no-littering-var-directory)
-(add-to-list 'recentf-exclude no-littering-etc-directory)
+(add-to-list 'recentf-exclude aar/cache-dir)
+(add-to-list 'recentf-exclude aar/etc-dir)
 (recentf-mode t)
 (add-hook 'find-file-hook #'recentf-save-list)
 (add-to-list 'recentf-exclude "^/\\(?:ssh\\|su\\|sudo\\)?:")

@@ -14,16 +14,16 @@
 (require 'gcmh)
 (gcmh-mode 1)
 
-;;; no-littering
-(aar/maybe-install-package 'no-littering)
-(require 'no-littering)
-
 ;; Auto-save transforms
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(setq auto-save-list-file-prefix (aar/expand-cache-file-name "autosave/")
+      auto-save-file-name-transforms
+      (list (list "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
+                  ; Prefix tramp auto-saves to prevent conflicts
+                  (concat auto-save-list-file-prefix "tramp-\\2") t)
+            (list ".*" auto-save-list-file-prefix t)))
 
 ;; Set file for custom.el to use
-(setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+(setq custom-file (aar/expand-etc-file-name "custom.el"))
 
 ;;; Dashboard
 (aar/maybe-install-package 'page-break-lines)

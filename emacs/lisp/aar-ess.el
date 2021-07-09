@@ -11,7 +11,7 @@
 (setq ess-use-flymake t)
 (setq ess-nuke-trailing-whitespace-p t)
 (setq ess-style 'DEFAULT)
-(setq ess-history-directory (no-littering-expand-etc-file-name "ess-history/"))
+(setq ess-history-directory (aar/expand-etc-file-name "ess-history/"))
 
 (load "ess-autoloads")
 (add-to-list 'auto-mode-alist '("\\.R\\'" . ess-r-mode))

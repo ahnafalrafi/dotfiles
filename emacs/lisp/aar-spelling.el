@@ -6,17 +6,14 @@
 
 ;;; ispell
 (setq ispell-dictionary "english")
-
-;; Let no-littering handle dictionary location
-(setq ispell-personal-dictionary (no-littering-expand-etc-file-name
-                                  "ispell_personal"))
+(setq ispell-personal-dictionary (aar/expand-etc-file-name "ispell_personal"))
 (setq ispell-local-dictionary-alist `((nil "[[:alpha:]]" "[^[:alpha:]]"
                                            "['\x2019]" nil ("-B") nil utf-8)))
 (global-set-key [remap ispell-word] #'aar/spell-correct)
 
 ;;; spell-fu
 (aar/maybe-install-package 'spell-fu)
-(setq spell-fu-directory (no-littering-expand-etc-file-name "spell-fu"))
+(setq spell-fu-directory (aar/expand-etc-file-name "spell-fu"))
 
 (evil-define-key 'normal 'global
   (kbd "z g") #'spell-fu-word-add
