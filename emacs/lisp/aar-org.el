@@ -4,10 +4,7 @@
 
 ;;; Code:
 
-
-;; See https://github.com/jwiegley/use-package/issues/319#issuecomment-363981027
-(unless (file-expand-wildcards (concat package-user-dir "/org-[0-9]*"))
-  (package-install (elt (cdr (assoc 'org package-archive-contents)) 0)))
+(aar/maybe-install-package 'org)
 
 (setq org-directory "~/Dropbox/org/")
 (setq org-default-notes-file (concat org-directory "inbox.org"))

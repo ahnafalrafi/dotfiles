@@ -21,12 +21,30 @@
   (package-refresh-contents))
 
 (defun aar/maybe-install-package (pkg)
-  (unless (package-installed-p pkg)
-    (package-refresh-contents)
-    (package-install pkg))
+  "Install package PKG from one of the `package-archives'.
+
+First checks to see if the symbol PKG is a built-in package. If not, a standard
+`package-refresh-contents' followed by `package-install' is carried out if PKG
+is not already installed. Otherwise, check to see if a version of PKG exists in
+`package-user-dir' and if not, carry out `package-refresh-contents' followed by
+a forced `package-install' specifically from `package-archives' (i.e. ignore the
+fact that PKG is built-in)."
+  (if (not (package-built-in-p pkg))
+      ;; Most packages don't need the special installation instructions
+      (unless (package-installed-p pkg)
+        (package-refresh-contents)
+        (package-install pkg))
+    ;; Special case for installing built-in packages from repositories.
+    ;; See this link in use-package issues:
+    ;; https://github.com/jwiegley/use-package/issues/319#issuecomment-363981027
+    (unless (file-expand-wildcards
+             (concat package-user-dir "/" (symbol-name pkg) "-[0-9]*"))
+      (package-refresh-contents)
+      (package-install (elt (cdr (assoc pkg package-archive-contents)) 0))))
+
   (add-to-list 'package-selected-packages pkg 'append))
 
-;;; Upgrade installed packages
+;; Upgrade installed packages
 ;; Inspired from paradox.el, extracted from:
 ;; https://www.reddit.com/r/emacs/comments/3m5tqx/can_usepackage_upgrade_installed_packages/
 (defun aar/package-upgrade-packages (&optional no-fetch)
