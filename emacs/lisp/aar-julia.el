@@ -89,14 +89,14 @@ available."
                   ,@eglot-julia-flags
                   ,eglot-julia-language-server-script))))
 
-;;; julia hook functions
+;;; julia hook function
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
   (setq-local eglot-connect-timeout 300)
   (eglot-ensure))
 
-(add-hook 'julia-mode-hook     #'aar/julia-mode-h)
-(add-hook 'ess-julia-mode-hook #'aar/julia-mode-h)
+(dolist (hook '(julia-mode-hook ess-julia-mode-hook))
+  (add-hook hook #'aar/julia-mode-h))
 
 (provide 'aar-julia)
 ;;; aar-julia.el ends here
