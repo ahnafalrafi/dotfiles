@@ -38,6 +38,11 @@ DIR must include a .project file to be considered a project."
 (aar/maybe-install-package 'magit)
 (setq magit-completing-read-function #'consult--read)
 
+;; settings for transient (a magit dependency)
+(setq transient-levels-file  (aar/expand-cache-file-name "transient/levels"))
+(setq transient-values-file  (aar/expand-cache-file-name "transient/values"))
+(setq transient-history-file (aar/expand-cache-file-name "transient/history"))
+
 ;;; gitgutter
 (aar/maybe-install-package 'git-gutter)
 (global-git-gutter-mode +1)
