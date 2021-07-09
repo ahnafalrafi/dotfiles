@@ -76,6 +76,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (kbd aar/localleader-alt-key) 'aar/localleader-org-mode-map)
 
 (define-key aar/localleader-org-mode-map (kbd ".") #'consult-outline)
+(define-key aar/localleader-org-mode-map (kbd "p") #'org-preview-latex-fragment)
 (define-key aar/localleader-org-mode-map
   (kbd "l t") #'org-toggle-link-display)
 (define-key aar/localleader-org-mode-map
