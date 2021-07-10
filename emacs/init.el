@@ -72,6 +72,8 @@
 (setq split-width-threshold 160)
 (setq split-height-threshold nil)
 
+(setq bookmark-default-file (aar/expand-cache-file-name "bookmarks.el"))
+
 ;;;  Load configuration files
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
