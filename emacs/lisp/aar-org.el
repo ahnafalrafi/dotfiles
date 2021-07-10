@@ -216,10 +216,18 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (define-key aar/leader-map (kbd "o") 'aar/leader-org-map)
 (which-key-add-keymap-based-replacements aar/leader-map "o" "org")
 
+;;;;;; Functions
+(defun aar/find-file-in-org-directory ()
+  (interactive)
+  (let ((default-directory org-directory))
+    (call-interactively #'find-file)))
+
 (defun aar/jump-to-todo-file ()
   (interactive)
   (find-file (expand-file-name "todo.org" org-directory)))
 
+;;;;;; Bindings
+(define-key aar/leader-org-map (kbd "o") #'aar/find-file-in-org-directory)
 (define-key aar/leader-org-map (kbd "t") #'aar/jump-to-todo-file)
 
 (provide 'aar-org)
