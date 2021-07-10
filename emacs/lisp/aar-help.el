@@ -17,6 +17,7 @@
 (global-set-key [remap describe-function] #'helpful-callable)
 (global-set-key [remap describe-variable] #'helpful-variable)
 (global-set-key [remap describe-symbol]   #'helpful-symbol)
+(global-set-key [remap apropos-command]   #'consult-apropos)
 
 ;;; elisp-demos
 (aar/maybe-install-package 'elisp-demos)
