@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if command -v julia &> /dev/null
+then
+   julia -e 'using Pkg; Pkg.update()'
+else
+    echo "julia not in PATH."
+fi
