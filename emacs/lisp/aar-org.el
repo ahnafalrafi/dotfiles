@@ -68,30 +68,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (aar/maybe-install-package 'toc-org)
 (setq toc-org-hrefify-default "gh")
 
-;;; <localleader> org mode map
-(define-prefix-command 'aar/localleader-org-mode-map)
-(evil-define-key '(normal visual motion) org-mode-map
-  (kbd aar/localleader-key) 'aar/localleader-org-mode-map)
-(evil-define-key '(insert emacs) org-mode-map
-  (kbd aar/localleader-alt-key) 'aar/localleader-org-mode-map)
-
-(define-key aar/localleader-org-mode-map (kbd ".") #'consult-outline)
-(define-key aar/localleader-org-mode-map (kbd "p") #'org-preview-latex-fragment)
-(define-key aar/localleader-org-mode-map
-  (kbd "l t") #'org-toggle-link-display)
-(define-key aar/localleader-org-mode-map
-  (kbd "l i") #'org-toggle-inline-images)
-(define-key aar/localleader-org-mode-map (kbd "e") #'org-export-dispatch)
-(define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
-
-(evil-define-key '(normal visual motion) org-mode-map
-  (kbd "[ h") #'org-backward-heading-same-level
-  (kbd "] h") #'org-forward-heading-same-level
-  (kbd "[ l") #'org-previous-link
-  (kbd "] l") #'org-next-link
-  (kbd "[ c") #'org-babel-previous-src-block
-  (kbd "] c") #'org-babel-next-src-block)
-
 ;;; Hook for org-mode
 (defun aar/org-mode-h ()
   (setq-local spell-fu-faces-exclude '(org-block
@@ -204,6 +180,41 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 
   (setq org-latex-default-class "aar-article"))
+
+;;; <localleader> org mode map
+(define-prefix-command 'aar/localleader-org-mode-map)
+(evil-define-key '(normal visual motion) org-mode-map
+  (kbd aar/localleader-key) 'aar/localleader-org-mode-map)
+(evil-define-key '(insert emacs) org-mode-map
+  (kbd aar/localleader-alt-key) 'aar/localleader-org-mode-map)
+
+(define-key aar/localleader-org-mode-map (kbd ".") #'consult-outline)
+(define-key aar/localleader-org-mode-map (kbd "p") #'org-preview-latex-fragment)
+(define-key aar/localleader-org-mode-map
+  (kbd "l t") #'org-toggle-link-display)
+(define-key aar/localleader-org-mode-map
+  (kbd "l i") #'org-toggle-inline-images)
+(define-key aar/localleader-org-mode-map (kbd "e") #'org-export-dispatch)
+(define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
+
+(evil-define-key '(normal visual motion) org-mode-map
+  (kbd "[ h") #'org-backward-heading-same-level
+  (kbd "] h") #'org-forward-heading-same-level
+  (kbd "[ l") #'org-previous-link
+  (kbd "] l") #'org-next-link
+  (kbd "[ c") #'org-babel-previous-src-block
+  (kbd "] c") #'org-babel-next-src-block)
+
+;;; <leader> map and bindings for org-related stuff
+(define-prefix-command 'aar/leader-org-map)
+(define-key aar/leader-map (kbd "o") 'aar/leader-org-map)
+(which-key-add-keymap-based-replacements aar/leader-map "o" "org")
+
+(defun aar/jump-to-todo-file ()
+  (interactive)
+  (find-file (expand-file-name "todo.org" org-directory)))
+
+(define-key aar/leader-org-map (kbd "t") #'aar/jump-to-todo-file)
 
 (provide 'aar-org)
 ;;; aar-org.el ends here
