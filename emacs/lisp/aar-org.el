@@ -108,7 +108,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (turn-on-org-cdlatex))
 
 (add-hook 'org-mode-hook #'aar/org-mode-h)
-(add-hook 'org-tab-first #'aar/org-cycle-only-current-subtree-h)
+(add-hook 'org-tab-first-hook #'aar/org-cycle-only-current-subtree-h)
 (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
 ;;; ob-async
@@ -148,6 +148,12 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   ;; Configuration
   (setq org-latex-listings t)
   (setq org-latex-hyperref-template nil)
+  (setq org-latex-pdf-process
+        `(,(concat "latexmk "
+                   "-pdflatex='pdflatex -interaction nonstopmode' "
+                   "-pdf "
+                   "-bibtex "
+                   "-f %f")))
 
   (setq org-latex-listings-langs '((jupyter-python "Python")
                                    (emacs-lisp "common-lisp")
