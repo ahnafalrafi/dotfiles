@@ -45,17 +45,30 @@ the minibuffer prompt."
 (defun aar/yank-buffer-file-path ()
   "Copy the current buffer's path to the kill ring."
   (interactive)
-  (if-let (filename (or buffer-file-name (bound-and-true-p list-buffers-directory)))
+  (if-let (filename (or buffer-file-name
+                        (bound-and-true-p list-buffers-directory)))
       (message (kill-new (abbreviate-file-name filename)))
-    (error "Couldn't find file name in current buffer")))
+    (error "Couldn't find file path in current buffer")))
 
 ;;;;;; Copy path to directory containing file
 (defun aar/yank-buffer-dir-path ()
   "Copy the current buffer's directory path to the kill ring."
   (interactive)
-  (if-let (dir-name (or default-directory (bound-and-true-p list-buffers-directory)))
+  (if-let (dir-name (or default-directory
+                        (bound-and-true-p list-buffers-directory)))
       (message (kill-new (abbreviate-file-name dir-name)))
-    (error "Couldn't find directory name in current buffer")))
+    (error "Couldn't find directory path in current buffer")))
+
+;;;;;; Copy file name
+;; TODO: adjust for final child node of a directory path.
+(defun aar/yank-buffer-file-name ()
+  "Copy the current buffer's non-directory name to the kill ring."
+  (interactive)
+  (if-let (filename (or buffer-file-name
+                        (bound-and-true-p list-buffers-directory)))
+      (message (kill-new (file-name-nondirectory
+                          (abbreviate-file-name filename))))
+    (error "Couldn't find file name in current buffer")))
 
 ;;; Basic keybindings
 (define-key aar/leader-map (kbd ".") #'find-file)
@@ -69,6 +82,7 @@ the minibuffer prompt."
 (define-key aar/leader-file-map (kbd "p")   #'aar/find-file-in-config)
 (define-key aar/leader-file-map (kbd "y y") #'aar/yank-buffer-file-path)
 (define-key aar/leader-file-map (kbd "y d") #'aar/yank-buffer-dir-path)
+(define-key aar/leader-file-map (kbd "y n") #'aar/yank-buffer-file-name)
 
 ;;; dired
 (setq dired-listing-switches "-agho --group-directories-first")
