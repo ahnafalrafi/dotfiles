@@ -24,6 +24,7 @@
 (setq org-use-sub-superscripts '{})
 (setq org-highlight-latex-and-related '(native latex script entities))
 (setq org-confirm-babel-evaluate #'aar/org-confirm-babel-evaluate)
+(setq org-cycle-separator-lines 1)
 
 (defun aar/org-confirm-babel-evaluate (lang body)
   (not (string= lang "jupyter-python")))
