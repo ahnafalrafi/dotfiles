@@ -23,23 +23,27 @@
 (aar/maybe-install-package 'adaptive-wrap)
 (setq-default adaptive-wrap-extra-indent 0)
 
-;;; Parentheses
-;;;;;; paren
+;;; paren
 (setq show-paren-delay 0)
 (setq show-paren-highlight-openparen t)
 (setq show-paren-when-point-inside-paren t)
 (setq show-paren-when-point-in-periphery t)
 (show-paren-mode 1)
 
-;;;;;; elec-pair
+;;; elec-pair
 (electric-pair-mode 1)
 
-;;;;;; evil-surround
+;;; evil-surround
 (aar/maybe-install-package 'evil-surround)
 (require 'evil-surround)
 (global-evil-surround-mode 1)
 
-;;;;;; rainbow-delimiters
+;;; evil-matchit
+(aar/maybe-install-package 'evil-matchit)
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
+
+;;; rainbow-delimiters
 (aar/maybe-install-package 'rainbow-delimiters)
 
 ;;; Whitespaces
