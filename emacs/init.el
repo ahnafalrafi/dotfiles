@@ -99,6 +99,7 @@
 (require 'aar-python)
 
 (require 'aar-latex)
+(require 'aar-bib)
 (require 'aar-markdown)
 (require 'aar-org)
 
