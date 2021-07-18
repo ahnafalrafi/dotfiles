@@ -27,7 +27,10 @@
 
 ;;; Hooks
 (defun aar/help-mode-h ()
-  (setq-local show-trailing-whitespace nil))
+  (setq-local show-trailing-whitespace nil)
+
+  (visual-line-mode)
+  (display-line-numbers-mode))
 
 ;;; Some common stuff
 (dolist (hook '(Info-mode-hook help-mode-hook))
