@@ -59,12 +59,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 ;;;;;; evil-org
 (aar/maybe-install-package 'evil-org)
 
-;;; cdlatex
-(aar/maybe-install-package 'cdlatex)
-(setq cdlatex-sub-super-scripts-outside-math-mode nil)
-(setq cdlatex-use-dollar-to-ensure-math nil)
-(setq cdlatex-simplify-sub-super-scripts nil)
-
 ;;; toc-org
 (aar/maybe-install-package 'toc-org)
 (setq toc-org-hrefify-default "gh")
@@ -106,7 +100,9 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
   (toc-org-enable)
-  (turn-on-org-cdlatex))
+
+  (if (fboundp 'turn-on-org-cdlatex)
+      (turn-on-org-cdlatex)))
 
 (add-hook 'org-mode-hook #'aar/org-mode-h)
 (add-hook 'org-tab-first-hook #'aar/org-cycle-only-current-subtree-h)

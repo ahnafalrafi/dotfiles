@@ -77,6 +77,12 @@
 (setq evil-tex-toggle-override-m nil)
 (setq evil-tex-toggle-override-t t)
 
+;;; cdlatex
+(aar/maybe-install-package 'cdlatex)
+(setq cdlatex-sub-super-scripts-outside-math-mode nil)
+(setq cdlatex-use-dollar-to-ensure-math nil)
+(setq cdlatex-simplify-sub-super-scripts nil)
+
 ;;; reftex
 (setq reftex-plug-into-AUCTeX t)
 (setq reftex-toc-split-windows-fraction 0.3)
@@ -108,6 +114,7 @@
   (require 'auctex-latexmk)
   (auctex-latexmk-setup)
   (evil-tex-mode)
+  (turn-on-cdlatex)
   (reftex-mode)
   (eglot-ensure))
 
