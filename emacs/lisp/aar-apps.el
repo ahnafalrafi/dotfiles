@@ -118,44 +118,11 @@ method to prepare vterm at the corresponding remote directory."
 (advice-add #'pdf-view-previous-page-command :after #'image-bob)
 (advice-add #'pdf-view-next-page-command :after #'image-bob)
 
+;; In case doom-modeline is being used:
 (if (fboundp 'doom-modeline-def-modeline)
     (doom-modeline-def-modeline 'pdf
       '(bar window-number matches pdf-pages buffer-info)
       '(misc-info major-mode process vcs)))
-
-;;; ebib
-(aar/maybe-install-package 'ebib)
-(setq ebib-default-directory "~/Dropbox/research/")
-(setq ebib-bibtex-dialect 'biblatex)
-;; Open files in pdf-tools
-(setq ebib-file-associations nil)
-(setq ebib-bib-search-dirs '("~/Dropbox/research/"))
-(setq ebib-preload-bib-files '("bibliography.bib"))
-
-(defun aar/ebib-entry-mode-h ()
-  (setq-local show-trailing-whitespace nil)
-  (visual-line-mode))
-
-(add-hook 'ebib-entry-mode-hook #'aar/ebib-entry-mode-h)
-
-;;;;;; Keybindings
-;; <leader> keybinding to launch ebib
-(define-key aar/leader-apps-map (kbd "b") #'ebib)
-
-;; <localleader> bindings for ebib-index-mode
-(define-prefix-command 'aar/localleader-ebib-index-mode-map)
-(evil-define-key '(normal visual motion) ebib-index-mode-map
-  (kbd aar/localleader-key) 'aar/localleader-ebib-index-mode-map)
-(evil-define-key '(insert emacs) ebib-index-mode-map
-  (kbd aar/localleader-alt-key) 'aar/localleader-ebib-index-mode-map)
-
-;; <localleader> jump to entry
-(define-key aar/localleader-ebib-index-mode-map (kbd "j") #'ebib-jump-to-entry)
-
-;; Remap save-buffer ebib-save-current-database in ebib-index-mode-map. This is
-;; what C-x C-s does in ebib-index-mode-map anyway.
-(define-key ebib-index-mode-map
-  [remap save-buffer] #'ebib-save-current-database)
 
 (provide 'aar-apps)
 ;;; aar-apps.el ends here

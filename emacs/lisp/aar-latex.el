@@ -84,13 +84,6 @@
 
 (define-key aar/localleader-LaTeX-mode-map (kbd ";") #'reftex-toc)
 
-;;; bibtex
-(setq bibtex-dialect 'biblatex)
-(setq bibtex-align-at-equal-sign t)
-(setq bibtex-text-indentation 20)
-(with-eval-after-load 'bibtex
-  (define-key bibtex-mode-map (kbd "C-c \\") #'bibtex-fill-entry))
-
 ;;; eglot configuration for latex
 (with-eval-after-load 'eglot
   (add-to-list
