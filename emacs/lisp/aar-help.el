@@ -25,11 +25,13 @@
             :after #'elisp-demos-advice-describe-function-1)
 (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
 
-;;; info
-(add-hook
- 'Info-mode-hook
- (lambda ()
-   (setq-local show-trailing-whitespace nil)))
+;;; Hooks
+(defun aar/help-mode-h ()
+  (setq-local show-trailing-whitespace nil))
+
+;;; Some common stuff
+(dolist (hook '(Info-mode-hook help-mode-hook))
+  (add-hook hook #'aar/help-mode-h))
 
 (provide 'aar-help)
 ;;; aar-help.el ends here
