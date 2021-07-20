@@ -4,6 +4,13 @@
 
 ;;; Code:
 
+;;; Scrolling
+(setq-default scroll-margin 0)
+(setq-default scroll-step 1)
+(setq-default scroll-preserve-screen-position nil)
+(setq-default scroll-conservatively 10000)
+(setq-default auto-window-vscroll nil)
+
 ;;; Buffers
 ;;;;;; <leader> buffer map
 (define-prefix-command 'aar/leader-buffer-map)
@@ -48,6 +55,10 @@
 (add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
 
 ;;; Windows
+;; Favor vertical splits over horizontal ones. Screens are usually wide.
+(setq split-width-threshold 160)
+(setq split-height-threshold nil)
+
 ;;;;;; <leader> bindings for managing windows
 (define-key aar/leader-map (kbd "w") 'evil-window-map)
 
@@ -62,6 +73,11 @@
 (define-key evil-window-map (kbd "C-f") #'ffap-other-window)
 
 ;;; Frames
+;;;;;; Frame title: tell me if I am in daemon mode
+(setq frame-title-format (if (daemonp)
+                             '("AAR Daemacs - %b")
+                           '("AAR Emacs - %b")))
+
 ;;;;;; <leader> frame map
 (define-prefix-command 'aar/leader-frame-map)
 (define-key aar/leader-map (kbd "F") 'aar/leader-frame-map)

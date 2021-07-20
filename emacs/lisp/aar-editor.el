@@ -15,6 +15,23 @@
   (global-undo-fu-session-mode 1)
   (evil-set-undo-system 'undo-fu))
 
+;;; Indentation widths
+(setq-default standard-indent 2)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+
+(setq-default evil-shift-round standard-indent)
+
+;;; New lines at EOF
+(setq-default require-final-newline nil)
+(setq-default mode-require-final-newline t)
+(setq-default log-edit-require-final-newline nil)
+
+;; Long lines
+(setq-default fill-column 80)
+(setq-default word-wrap t)
+(setq-default truncate-lines t)
+
 ;;; electric-indent
 ;; See: https://emacs.stackexchange.com/questions/20896/change-the-behaviour-of-ret-with-electric-indent-to-only-indent-the-new-line
 (setq electric-indent-inhibit t)

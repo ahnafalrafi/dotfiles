@@ -33,11 +33,6 @@
 (setq use-dialog-box nil)
 (setq x-gtk-use-system-tooltips nil)
 
-;; Frame title: tell me if I am in daemon mode
-(setq frame-title-format (if (daemonp)
-                             '("AAR Daemacs - %b")
-                           '("AAR Emacs - %b")))
-
 ;; Clipboard/kill-ring
 (setq kill-do-not-save-duplicates t)
 
@@ -46,32 +41,7 @@
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 
-;; Scrolling
-(setq-default scroll-margin 0)
-(setq-default scroll-step 1)
-(setq-default scroll-preserve-screen-position nil)
-(setq-default scroll-conservatively 10000)
-(setq-default auto-window-vscroll nil)
-
-;; New lines at EOF
-(setq-default require-final-newline nil)
-(setq-default mode-require-final-newline t)
-(setq-default log-edit-require-final-newline nil)
-
-;; Long lines
-(setq-default fill-column 80)
-(setq-default word-wrap t)
-(setq-default truncate-lines t)
-
-;; Indentation widths
-(setq-default standard-indent 2)
-(setq-default tab-width 2)
-(setq-default indent-tabs-mode nil)
-
-;; Favor vertical splits over horizontal ones. Screens are usually wide.
-(setq split-width-threshold 160)
-(setq split-height-threshold nil)
-
+;; Bookmarks
 (setq bookmark-default-file (aar/expand-cache-file-name "bookmarks.el"))
 
 ;;;  Load configuration files
