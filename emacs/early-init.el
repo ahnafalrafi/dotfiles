@@ -58,7 +58,7 @@ Used for files that change often. Must end with a slash.")
 
 (when (featurep 'native-compile)
   ;; Silence compiler warnings as they can be pretty disruptive
-  (setq comp-async-report-warnings-errors nil)
+  (setq native-comp-async-report-warnings-errors nil)
 
   ;; Set the right directory to store the native comp cache
   (setcar native-comp-eln-load-path (aar/expand-cache-file-name "eln-cache/")))
