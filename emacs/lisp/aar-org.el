@@ -199,6 +199,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (kbd "l i") #'org-toggle-inline-images)
 (define-key aar/localleader-org-mode-map (kbd "e") #'org-export-dispatch)
 (define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
+(define-key aar/localleader-org-mode-map (kbd "t") #'org-toggle-checkbox)
 
 (evil-define-key '(normal visual motion) org-mode-map
   (kbd "[ h") #'org-backward-heading-same-level
@@ -223,9 +224,14 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (interactive)
   (find-file (expand-file-name "todo.org" org-directory)))
 
+(defun aar/jump-to-bookmarks-file ()
+  (interactive)
+  (find-file (expand-file-name "bookmarks.org" org-directory)))
+
 ;;;;;; Bindings
 (define-key aar/leader-org-map (kbd "o") #'aar/find-file-in-org-directory)
 (define-key aar/leader-org-map (kbd "t") #'aar/jump-to-todo-file)
+(define-key aar/leader-org-map (kbd "b") #'aar/jump-to-bookmarks-file)
 
 (provide 'aar-org)
 ;;; aar-org.el ends here
