@@ -24,15 +24,6 @@
 ;; yes/no to y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Cursor, tooltip and dialog box
-(when (fboundp 'blink-cursor-mode)
-  (blink-cursor-mode -1))
-(when (fboundp 'tooltip-mode)
-  (tooltip-mode -1))
-(setq visible-cursor nil)
-(setq use-dialog-box nil)
-(setq x-gtk-use-system-tooltips nil)
-
 ;; Clipboard/kill-ring
 (setq kill-do-not-save-duplicates t)
 

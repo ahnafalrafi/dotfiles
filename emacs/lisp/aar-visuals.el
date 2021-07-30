@@ -9,6 +9,18 @@
 (set-frame-font "JetBrainsMono Nerd Font-10.5" nil t)
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10.5"))
 
+;;; Dealing with Xressources - i.e. don't bother, ignore.
+(setq inhibit-x-resources t)
+
+;;; Cursor, tooltip and dialog box
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode -1))
+(when (fboundp 'tooltip-mode)
+  (tooltip-mode -1))
+(setq visible-cursor nil)
+(setq use-dialog-box nil)
+(setq x-gtk-use-system-tooltips nil)
+
 ;;; Display line numbers
 (setq display-line-numbers-type 'visual)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
@@ -19,11 +31,22 @@
 (add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
 
 ;;; Theme
-(setq modus-themes-org-blocks 'grayscale)
-(setq modus-themes-no-mixed-fonts t)
-(load-theme 'modus-vivendi t)
 (define-key aar/leader-map (kbd "t t") #'load-theme)
 
+(aar/maybe-install-package 'doom-themes)
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t)
+(setq doom-themes-enable-italic t)
+(load-theme 'doom-palenight t)
+
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
+
+(set-face-attribute 'vertical-border nil
+                      :foreground "#6272a4"
+                      :background "#6272a4")
 ;;; Icons
 (aar/maybe-install-package 'all-the-icons)
 (require 'all-the-icons)
