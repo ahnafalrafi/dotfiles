@@ -34,15 +34,6 @@
 (line-number-mode t)
 (column-number-mode t)
 
-;;;;;; doom-modeline
-(aar/maybe-install-package 'doom-modeline)
-(setq doom-modeline-height 13)
-(setq doom-modeline-bar-width 3)
-(setq doom-modeline-window-width-limit fill-column)
-
-(doom-modeline-mode t)
-(add-hook 'after-init-hook #'doom-modeline-mode)
-
 ;;;;;; hide-mode-line
 (aar/maybe-install-package 'hide-mode-line)
 (require 'hide-mode-line)
