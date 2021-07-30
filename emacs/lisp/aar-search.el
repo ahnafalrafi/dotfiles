@@ -34,6 +34,7 @@
 ;;; Keybindings
 (define-key aar/leader-search-map (kbd "c") #'evil-ex-nohighlight)
 (define-key aar/leader-search-map (kbd "p") #'consult-ripgrep)
+(define-key aar/leader-search-map (kbd "l") #'consult-line)
 
 (provide 'aar-search)
 ;;; aar-search.el ends here
