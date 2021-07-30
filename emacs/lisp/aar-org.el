@@ -126,7 +126,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                                                      (:kernel  . "python3")))
 
 ;;; ob-julia
-;; (add-to-list 'load-path (expand-file-name "ob-julia" aar/vendor-lisp-dir))
+(add-to-list 'load-path (expand-file-name "ob-julia" aar/vendor-lisp-dir))
 
 ;;; with-eval-after-load statements
 (with-eval-after-load 'org
