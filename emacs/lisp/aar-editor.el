@@ -15,12 +15,18 @@
   (global-undo-fu-session-mode 1)
   (evil-set-undo-system 'undo-fu))
 
+;;; Indentation guides
+(aar/maybe-install-package 'highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-responsive 'stack)
+
 ;;; Indentation widths
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 
-(setq-default evil-shift-round standard-indent)
+(setq-default evil-shift-width standard-indent)
 
 ;;; New lines at EOF
 (setq-default require-final-newline nil)
