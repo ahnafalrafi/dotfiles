@@ -11,7 +11,7 @@ clean:
 .PHONY: watch
 watch:
 	@while true;          \
-	  do;                 \
+	  do                  \
 	  inotifywait $(DOC); \
 	  sleep 0.01;         \
 	  make all;           \
