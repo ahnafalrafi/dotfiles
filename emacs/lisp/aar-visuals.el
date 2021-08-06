@@ -5,9 +5,8 @@
 ;;; Code:
 
 ;;; Font
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10.5")
-(set-frame-font "JetBrainsMono Nerd Font-10.5" nil t)
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10.5"))
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10.5")
 
 ;;; Dealing with Xressources - i.e. don't bother, ignore.
 (setq inhibit-x-resources t)
@@ -31,22 +30,28 @@
 (add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
 
 ;;; Theme
-(define-key aar/leader-map (kbd "t t") #'load-theme)
+(defvar aar/modus-vivendi t
+  "Indicate whether modus-vivendi (the dark variant) should be loaded.")
 
-(aar/maybe-install-package 'doom-themes)
-;; Global settings (defaults)
-(setq doom-themes-enable-bold t)
-(setq doom-themes-enable-italic t)
-(load-theme 'doom-palenight t)
+(defun aar/load-modus-theme ()
+  "Load modus theme variant according to value of `aar-modus-vivendi'."
+  (setq modus-themes-no-mixed-fonts t)
+  (setq modus-themes-paren-match '(bold intense))
+  (setq modus-themes-org-blocks 'gray-background)
+  (if aar/modus-vivendi
+      (load-theme 'modus-vivendi t)
+    (load-theme 'modus-operandi t)))
 
-;; Enable flashing mode-line on errors
-(doom-themes-visual-bell-config)
-;; Corrects (and improves) org-mode's native fontification.
-(doom-themes-org-config)
+(defun aar/load-modus-theme-after-frame-h (frame)
+  "Load modus theme after the frame has been made.
+Useful for loading the themes properly in daemon mode"
+  (with-selected-frame frame
+    (aar/load-modus-theme)))
 
-(set-face-attribute 'vertical-border nil
-                      :foreground "#6272a4"
-                      :background "#6272a4")
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'aar/load-modus-theme-after-frame-h)
+  (aar/load-modus-theme))
+
 ;;; Icons
 (aar/maybe-install-package 'all-the-icons)
 (require 'all-the-icons)
