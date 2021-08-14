@@ -1,4 +1,4 @@
-;;; aar-config-langs.el --- -*- lexical-binding: t; -*-
+;;; aar-langs-config.el --- -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
@@ -41,5 +41,5 @@
 (require 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
-(provide 'aar-config-langs)
-;;; aar-config-langs.el ends here
+(provide 'aar-langs-config)
+;;; aar-langs-config.el ends here

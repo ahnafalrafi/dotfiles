@@ -54,10 +54,10 @@
 (require 'aar-spelling)
 (require 'aar-apps)
 
-(require 'aar-config-langs)
 (require 'aar-ess)
 (require 'aar-julia)
 (require 'aar-python)
+(require 'aar-langs-config)
 
 (require 'aar-latex)
 (require 'aar-bib)
