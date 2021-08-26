@@ -58,6 +58,7 @@
 (require 'aar-julia)
 (require 'aar-python)
 (require 'aar-langs-config)
+(require 'aar-langs-extra)
 
 (require 'aar-latex)
 (require 'aar-bib)
