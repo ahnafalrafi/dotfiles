@@ -32,6 +32,9 @@
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 
+;; Disable the alarm bell
+(setq ring-bell-function 'ignore)
+
 ;; Bookmarks
 (setq bookmark-default-file (aar/expand-cache-file-name "bookmarks.el"))
 
