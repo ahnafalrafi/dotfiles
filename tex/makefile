@@ -10,9 +10,4 @@ clean:
 
 .PHONY: watch
 watch:
-	@while true;          \
-	  do                  \
-	  inotifywait $(DOC); \
-	  sleep 0.01;         \
-	  make all;           \
-	  done
+	@latexmk -quiet -pvc -bibtex -f -pdf -use-make $(DOC)
