@@ -51,6 +51,7 @@
                                         "In"      "in"
                                         "Inside"  "inside"
                                         "Into"    "into"
+                                        "Is"      "is"
                                         "Like"    "like"
                                         "Near"    "near"
                                         "Of"      "of"
@@ -109,8 +110,10 @@ documentation for `bibtex-generate-autokey' for more details."
 (aar/maybe-install-package 'ebib)
 (setq ebib-default-directory "~/Dropbox/research/")
 (setq ebib-bibtex-dialect 'biblatex)
-;; Open files in pdf-tools
-(setq ebib-file-associations nil)
+;; Open pdf files in zathura
+(with-eval-after-load 'ebib
+  (add-to-list 'ebib-file-associations '("pdf" . "zathura")))
+
 (setq ebib-bib-search-dirs '("~/Dropbox/research/"
                              "~/Dropbox/research/ongoing/"))
 (setq ebib-preload-bib-files '("bibliography.bib"))
