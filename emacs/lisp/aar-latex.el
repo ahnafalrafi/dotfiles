@@ -45,6 +45,11 @@
 (add-hook 'TeX-after-compilation-finished-functions-hook
           #'TeX-revert-document-buffer)
 
+;;; Completions
+(aar/maybe-install-package 'company-auctex)
+(aar/maybe-install-package 'company-reftex)
+(aar/maybe-install-package 'company-math)
+
 ;;; <localleader> LaTeX-mode bindings
 (define-prefix-command 'aar/localleader-LaTeX-mode-map)
 (evil-define-key '(normal visual motion) LaTeX-mode-map
@@ -99,12 +104,6 @@
 
 (define-key aar/localleader-LaTeX-mode-map (kbd ";") #'reftex-toc)
 
-;;; eglot configuration for latex
-(with-eval-after-load 'eglot
-  (add-to-list
-   'eglot-server-programs
-   `((tex-mode context-mode texinfo-mode bibtex-mode) . ("texlab"))))
-
 ;;; Hook for tex modes
 (defun aar/latex-mode-h ()
   (setq-local fill-nobreak-predicate nil)
@@ -125,7 +124,13 @@
   (evil-tex-mode)
   (turn-on-cdlatex)
   (reftex-mode)
-  (eglot-ensure))
+  (setq-local company-backends (append '((company-math-symbols-latex
+                                          company-latex-commands
+                                          company-auctex-environments
+                                          company-auctex-macros
+                                          company-reftex-labels
+                                          company-reftex-citations))
+                                       company-backends)))
 
 (add-hook 'TeX-mode-hook #'aar/latex-mode-h)
 
