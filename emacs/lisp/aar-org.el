@@ -7,7 +7,15 @@
 (aar/maybe-install-package 'org)
 
 (setq org-directory "~/Dropbox/org/")
-(setq org-default-notes-file (concat org-directory "inbox.org"))
+(setq org-default-notes-file (concat org-directory "notes.org"))
+(setq org-capture-templates
+        '(("t" "Todo" entry
+           (file+headline (concat org-directory "todo.org") "Inbox")
+           "* TODO %?\n%i\n%a" :prepend t)
+          ("n" "Personal notes" entry
+           (file+headline org-default-notes-file "Inbox")
+           "* %u %?\n%i\n%a" :prepend t)))
+
 (setq org-indent-mode nil)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
