@@ -13,8 +13,17 @@
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 (setq TeX-save-query nil)
-(setq TeX-view-program-selection '((output-pdf "PDF Tools")
-                                   (output-pdf "Zathura")))
+(setq TeX-view-program-selection '((output-pdf "Zathura")))
+
+(with-eval-after-load 'tex
+    (add-to-list 'TeX-expand-list
+                 '("%sn" (lambda () server-name)))
+    (add-to-list 'TeX-view-program-list
+                 '("Zathura"
+                   ("nohup zathura %o"
+                    (mode-io-correlate " --synctex-forward %n:0:%b -x \"emacsclient --socket-name=%sn --no-wait +%{line} %{input}\""))
+                   "zathura")))
+
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-mode 'synctex)
 (setq TeX-source-correlate-start-server t)
