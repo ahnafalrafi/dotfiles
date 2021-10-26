@@ -71,6 +71,14 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (aar/maybe-install-package 'toc-org)
 (setq toc-org-hrefify-default "gh")
 
+;;; org-roam
+(aar/maybe-install-package 'org-roam)
+(setq org-roam-v2-ack t)
+(setq org-roam-directory "~/Dropbox/org-roam/")
+(unless (file-directory-p (file-truename org-roam-directory))
+    (make-directory org-roam-directory))
+(org-roam-db-autosync-mode)
+
 ;;; Hook for org-mode
 (defun aar/org-mode-h ()
   (setq-local spell-fu-faces-exclude '(org-block
