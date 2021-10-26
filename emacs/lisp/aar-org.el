@@ -236,10 +236,15 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (interactive)
   (find-file (expand-file-name "bookmarks.org" org-directory)))
 
+(defun aar/jump-to-readinglist-file ()
+  (interactive)
+  (find-file (expand-file-name "readinglist.org" org-directory)))
+
 ;;;;;; Bindings
 (define-key aar/leader-org-map (kbd "o") #'aar/find-file-in-org-directory)
 (define-key aar/leader-org-map (kbd "t") #'aar/jump-to-todo-file)
 (define-key aar/leader-org-map (kbd "b") #'aar/jump-to-bookmarks-file)
+(define-key aar/leader-org-map (kbd "r") #'aar/jump-to-readinglist-file)
 
 (provide 'aar-org)
 ;;; aar-org.el ends here
