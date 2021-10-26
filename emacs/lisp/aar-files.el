@@ -92,6 +92,9 @@ the minibuffer prompt."
 (define-key aar/leader-file-map (kbd "d") #'dired)
 (define-key aar/leader-file-map (kbd "j") #'dired-jump)
 
+(with-eval-after-load 'wdired
+  (define-key wdired-mode-map [remap save-buffer] #'wdired-finish-edit))
+
 ;;;;;; dired-single
 (aar/maybe-install-package 'dired-single)
 
