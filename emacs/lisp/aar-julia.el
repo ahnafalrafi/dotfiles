@@ -68,7 +68,15 @@ Otherwise returns nil"
   "Extra flags to pass to the Julia executable."
   :type '(repeat string))
 
-(defcustom eglot-julia-language-server-project (getenv "JULIA_LSP")
+(defcustom eglot-julia-language-server-project
+  (directory-file-name
+   (file-name-directory
+    (with-temp-buffer
+      (insert-file-contents (expand-file-name "julia/lang_server_locate"
+                                              (or (getenv "XDG_CACHE_HOME")
+                                                  "~/.cache")))
+      (buffer-string))))
+  ;; (getenv "JULIA_LSP")
   "Julia project to run language server from.
 The project should have LanguageServer and SymbolServer packages
 available."
