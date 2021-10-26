@@ -84,7 +84,6 @@
 ;;; auctex-latexmk
 (aar/maybe-install-package 'auctex-latexmk)
 (setq auctex-latexmk-inherit-TeX-PDF-mode t)
-(setq TeX-command-default "LatexMk")
 
 ;;; evil-tex
 (aar/maybe-install-package 'evil-tex)
@@ -116,6 +115,7 @@
                                        font-latex-warning-face
                                        button
                                        eglot-highlight-symbol-face))
+  (setq-local TeX-command-default "LatexMk")
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
