@@ -4,22 +4,19 @@
 
 ;;; Code:
 
-;;; vertico
-(aar/maybe-install-package 'vertico)
+;; vertico
+(straight-use-package 'vertico)
 (setq vertico-cycle t)
 (vertico-mode)
 
-;;; savehist-mode: persist history over Emacs restarts.
-;; Vertico sorts by history position.
+;; savehist-mode: persist history over Emacs restarts.
 (setq savehist-file (aar/expand-cache-file-name "savehist.el"))
 (setq savehist-save-minibuffer-history t)
 (savehist-mode)
 
-;;; consult
-(aar/maybe-install-package 'consult)
+;; consult
+(straight-use-package 'consult)
 (setq consult-preview-key 'nil)
-
-(require 'consult)
 
 (global-set-key [remap apropos]            #'consult-apropos)
 (global-set-key [remap bookmark-jump]      #'consult-bookmark)
@@ -30,21 +27,20 @@
 (global-set-key [remap recentf-open-files] #'consult-recent-file)
 (global-set-key [remap yank-pop]           #'consult-yank-pop)
 
-;;; marginalia
-(aar/maybe-install-package 'marginalia)
+;; marginalia
+(straight-use-package 'marginalia)
 (setq marginalia-annotators '(marginalia-annotators-heavy
                               marginalia-annotators-light))
 (marginalia-mode)
 
-;;; orderless
-(aar/maybe-install-package 'orderless)
-(require 'orderless)
+;; orderless
+(straight-use-package 'orderless)
 (setq completion-styles '(orderless))
 (setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles . (partial-completion)))))
 
-;;; company-mode
-(aar/maybe-install-package 'company)
+;; company-mode
+(straight-use-package 'company)
 
 (with-eval-after-load 'company
   (evil-define-key 'insert company-mode-map
@@ -77,8 +73,6 @@
 (setq company-tooltip-align-annotations t)
 (setq company-transformers '(company-sort-by-backend-importance))
 
-;; (dolist (hook '(prog-mode-hook text-mode-hook))
-;;   (add-hook hook #'company-mode))
 (add-hook 'after-init-hook #'global-company-mode)
 (add-hook 'after-init-hook #'company-tng-mode)
 
