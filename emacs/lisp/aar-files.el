@@ -4,13 +4,14 @@
 
 ;;; Code:
 
-;;; <leader> file map
+;; <leader> file map
 (define-prefix-command 'aar/leader-file-map)
 (define-key aar/leader-map (kbd "f") 'aar/leader-file-map)
 (which-key-add-keymap-based-replacements aar/leader-map "f" "file")
 
-;;; Functions
-;;;;;; Insert file names from minibuffer
+;; Functions
+;; Insert file names from minibuffer
+;;;###autoload
 (defun aar/insert-file-name (filename &optional args)
   "Insert name of file FILENAME into buffer after point.
 Prefixed with \\[universal-argument], expand the file name to its fully
@@ -30,7 +31,8 @@ the minibuffer prompt."
         (t
          (insert filename))))
 
-;;;;;; Find file in config
+;; Find file in config
+;;;###autoload
 (defun aar/find-file-in-config ()
   "Find files in configuration directory using project.el"
   (interactive)
@@ -41,7 +43,8 @@ the minibuffer prompt."
          (dirs (list (project-root pr))))
     (project-find-file-in (thing-at-point 'filename) dirs pr)))
 
-;;;;;; Copy file path
+;; Copy file path
+;;;###autoload
 (defun aar/yank-buffer-file-path ()
   "Copy the current buffer's path to the kill ring."
   (interactive)
@@ -50,7 +53,8 @@ the minibuffer prompt."
       (message (kill-new (abbreviate-file-name filename)))
     (error "Couldn't find file path in current buffer")))
 
-;;;;;; Copy path to directory containing file
+;; Copy path to directory containing file
+;;;###autoload
 (defun aar/yank-buffer-dir-path ()
   "Copy the current buffer's directory path to the kill ring."
   (interactive)
@@ -59,8 +63,9 @@ the minibuffer prompt."
       (message (kill-new (abbreviate-file-name dir-name)))
     (error "Couldn't find directory path in current buffer")))
 
-;;;;;; Copy file name
+;; Copy file name
 ;; TODO: adjust for final child node of a directory path.
+;;;###autoload
 (defun aar/yank-buffer-file-name ()
   "Copy the current buffer's non-directory name to the kill ring."
   (interactive)
@@ -70,9 +75,8 @@ the minibuffer prompt."
                           (abbreviate-file-name filename))))
     (error "Couldn't find file name in current buffer")))
 
-;;; Basic keybindings
+;; Basic keybindings
 (define-key aar/leader-map (kbd ".") #'find-file)
-
 (define-key aar/leader-file-map (kbd "f")   #'find-file)
 (define-key aar/leader-file-map (kbd "n")   #'rename-file)
 (define-key aar/leader-file-map (kbd "s")   #'save-buffer)
@@ -84,7 +88,7 @@ the minibuffer prompt."
 (define-key aar/leader-file-map (kbd "y d") #'aar/yank-buffer-dir-path)
 (define-key aar/leader-file-map (kbd "y n") #'aar/yank-buffer-file-name)
 
-;;; dired
+;; dired
 (setq dired-listing-switches "-agho --group-directories-first")
 (add-hook 'dired-mode-hook #'display-line-numbers-mode)
 (add-hook 'dired-mode-hook #'display-fill-column-indicator-mode)
@@ -95,40 +99,31 @@ the minibuffer prompt."
 (with-eval-after-load 'wdired
   (define-key wdired-mode-map [remap save-buffer] #'wdired-finish-edit))
 
+;; dired-single and dired-x
+(straight-use-package 'dired-single)
 (with-eval-after-load 'dired
-  (require 'dired-x))
-
-;;;;;; dired-single
-(aar/maybe-install-package 'dired-single)
-
-;;;;;; all-the-icons-dired
-(aar/maybe-install-package 'all-the-icons-dired)
-
-;;;;;; Dired hook to add functionality from above packages
-(defun aar/dired-h ()
-  (require 'dired-single)
+  (require 'dired-x)
   (define-key dired-mode-map [remap dired-find-file] #'dired-single-buffer)
   (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
     #'dired-single-buffer-mouse)
   (define-key dired-mode-map [remap dired-up-directory]
     #'dired-single-up-directory)
   (evil-define-key '(normal visual motion) dired-mode-map
-    (kbd "h")      #'dired-single-up-directory
-    (kbd "l")      #'dired-single-buffer)
+    (kbd "h") #'dired-single-up-directory
+    (kbd "l") #'dired-single-buffer))
 
-  (all-the-icons-dired-mode))
+;; all-the-icons-dired
+(straight-use-package 'all-the-icons-dired)
+(add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
 
-(add-hook 'dired-mode-hook #'aar/dired-h)
-
-;;; recentf
-(require 'recentf)
+;; recentf
+(add-hook 'after-init-hook #'recentf-mode)
 (setq recentf-save-file (aar/expand-cache-file-name "recentf-save.el"))
 (setq recentf-max-saved-items 50)
 (setq recentf-max-menu-items 15)
 (setq recentf-auto-cleanup (if (daemonp) 300))
 (add-to-list 'recentf-exclude aar/cache-dir)
 (add-to-list 'recentf-exclude aar/etc-dir)
-(recentf-mode t)
 (add-hook 'find-file-hook #'recentf-save-list)
 (add-to-list 'recentf-exclude "^/\\(?:ssh\\|su\\|sudo\\)?:")
 
