@@ -37,7 +37,6 @@ DIR must include a .project file to be considered a project."
 
 ;;; magit
 (straight-use-package 'magit)
-(setq magit-completing-read-function #'consult--read)
 
 ;; settings for transient (a magit dependency)
 (setq transient-levels-file  (aar/expand-cache-file-name "transient/levels"))
