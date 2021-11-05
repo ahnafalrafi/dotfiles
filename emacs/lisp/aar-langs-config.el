@@ -35,7 +35,7 @@
 
 ;;; lua
 (straight-use-package 'lua-mode)
-(add-hook 'lua-mode #'eglot-ensure)
+(add-hook 'lua-mode #'lsp-deferred)
 
 ;;; nix
 (straight-use-package 'nix-mode)

@@ -40,25 +40,13 @@ Otherwise returns nil"
 (with-eval-after-load 'project
   (add-to-list 'project-find-functions 'aar/project-try-julia))
 
-;;; eglot configuration - also obviously shamelessly stolen from eglot-jl
-(defgroup eglot-julia nil
-  "Interaction with LanguageServer.jl LSP server via eglot"
-  :prefix "eglot-julia-"
-  :group 'applications)
+;;; lsp-julia
+(straight-use-package 'lsp-julia)
 
-(defcustom eglot-julia-sysimage (expand-file-name "~/.cache/julia/julials.so")
-  "Path to system image with precompiled LanguageServer.jl and friends."
-  :type 'string)
+(defconst aar/julia-sysimage (expand-file-name "~/.cache/julia/julials.so")
+  "Path to system image with precompiled LanguageServer.jl and friends.")
 
-(defcustom eglot-julia-flags `("--startup-file=no"
-                               "--history-file=no"
-                               ,(if (file-exists-p eglot-julia-sysimage)
-                                    (concat "--sysimage=" eglot-julia-sysimage))
-                               "--sysimage-native-code=yes")
-  "Extra flags to pass to the Julia executable."
-  :type '(repeat string))
-
-(defcustom eglot-julia-language-server-project
+(defconst aar/julia-language-server-project
   (directory-file-name
    (file-name-directory
     (with-temp-buffer
@@ -66,36 +54,28 @@ Otherwise returns nil"
                                               (or (getenv "XDG_CACHE_HOME")
                                                   "~/.cache")))
       (buffer-string))))
-  ;; (getenv "JULIA_LSP")
   "Julia project to run language server from.
 The project should have LanguageServer and SymbolServer packages
-available."
-  :type 'string)
+available.")
 
-(defcustom eglot-julia-language-server-script
-  (expand-file-name "~/.config/julia/lang_server_invoke.jl")
-  "Julia script used to invoke language server and capabilities."
-  :type 'string)
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               ;; function instead of strings to find project dir at runtime
-               `((julia-mode ess-julia-mode)
-                 .
-                 ("julia"
-                  ,(concat "--project=" eglot-julia-language-server-project)
-                  ,@eglot-julia-flags
-                  ,eglot-julia-language-server-script))))
+(setq lsp-julia-package-dir nil)
+(setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+(setq lsp-julia-flags `("--startup-file=no"
+                        "--history-file=no"
+                        ,(concat "--project="
+                                 aar/julia-language-server-project)
+                        ,(if (file-exists-p aar/julia-sysimage)
+                             (concat "--sysimage=" aar/julia-sysimage))
+                        "--sysimage-native-code=yes"))
 
 ;;; julia hook function
 ;;;###autoload
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
-  (setq-local eglot-connect-timeout 300)
-  (eglot-ensure))
-
-(dolist (hook '(julia-mode-hook ess-julia-mode-hook))
-  (add-hook hook #'aar/julia-mode-h))
+  (tree-sitter-hl-mode)
+  (require 'lsp-julia)
+  (lsp-deferred))
+(add-hook 'julia-mode-hook #'aar/julia-mode-h)
 
 (provide 'aar-julia)
 ;;; aar-julia.el ends here

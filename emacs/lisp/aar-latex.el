@@ -104,8 +104,7 @@
                                        font-latex-sedate-face
                                        font-latex-warning-face
                                        font-lock-type-face
-                                       button
-                                       eglot-highlight-symbol-face))
+                                       button))
   (setq-local TeX-command-default "LatexMk")
   (visual-line-mode)
   (auto-fill-mode)

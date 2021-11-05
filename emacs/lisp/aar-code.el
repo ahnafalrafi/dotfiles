@@ -12,13 +12,15 @@
 ;; <leader> code bindings
 (define-key aar/leader-code-map (kbd "i") #'imenu)
 
-;; eldoc
-(setq eldoc-echo-area-use-multiline-p 2)
+;; flycheck
+(straight-use-package 'flycheck)
 
-;; flymake
-(evil-define-key '(normal motion) 'flymake-mode-map
-  (kbd "] e") #'flymake-goto-next-error
-  (kbd "[ e") #'flymake-goto-prev-error)
+(evil-define-key '(normal visual motion) 'flycheck-mode-map
+  (kbd "] e") #'flycheck-next-error
+  (kbd "[ e") #'flycheck-previous-error)
+
+;; I hate LaTeX syntax checking and so will disable this preemptively.
+(setq-default flycheck-disabled-checkers '(tex-chktex tex-lacheck))
 
 ;;; tree-sitter
 (straight-use-package 'tree-sitter)
@@ -29,9 +31,32 @@
             (require 'tree-sitter-langs)
             (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)))
 
-;;; eglot
-(straight-use-package 'eglot)
-(setq eglot-autoshutdown t)
+;;; lsp-mode
+(straight-use-package 'lsp-mode)
+(straight-use-package 'lsp-ui)
+
+(setq lsp-session-file (aar/expand-etc-file-name "lsp-session"))
+(setq lsp-server-install-dir (aar/expand-cache-file-name "lsp/"))
+(setq lsp-keymap-prefix "C-c l")
+(setq lsp-ui-sideline-show-diagnostics t)
+(setq lsp-ui-sideline-ignore-duplicate t)
+(setq lsp-ui-sideline-diagnostic-max-lines 10)
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-ui-doc-show-with-mouse nil)
+
+(with-eval-after-load 'lsp-mode
+  (define-key aar/leader-code-map (kbd "l") lsp-command-map))
+
+;;;###autoload
+(defun aar/lsp-mode-h ()
+  (lsp-enable-which-key-integration)
+  (lsp-ui-mode)
+  (evil-local-set-key 'normal (kbd "K") #'lsp-describe-thing-at-point)
+  (evil-local-set-key 'normal (kbd "g d") #'lsp-find-definition)
+  (evil-local-set-key 'normal (kbd "g r") #'lsp-find-references))
+
+(add-hook 'lsp-mode-hook #'aar/lsp-mode-h)
 
 (provide 'aar-code)
 ;;; aar-code.el ends here

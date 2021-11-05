@@ -7,7 +7,7 @@
 (defun aar/python-h ()
   (tree-sitter-mode)
   (rainbow-delimiters-mode)
-  (eglot-ensure))
+  (lsp-deferred))
 
 (add-hook 'python-mode-hook #'aar/python-h)
 
