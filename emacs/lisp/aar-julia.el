@@ -14,14 +14,6 @@
 (evil-define-key '(insert emacs) julia-mode-map
   (kbd aar/localleader-alt-key) 'aar/localleader-julia-mode-map)
 
-(with-eval-after-load 'julia-mode
-  (evil-define-key '(normal visual motion) julia-mode-map
-    (kbd aar/localleader-key) 'aar/localleader-julia-mode-map)
-  (evil-define-key '(insert emacs) julia-mode-map
-    (kbd aar/localleader-alt-key) 'aar/localleader-julia-mode-map)
-
-  (define-key ess-julia-mode-map (kbd "TAB") #'julia-latexsub-or-indent))
-
 ;;; julia-repl
 (straight-use-package 'julia-repl)
 (define-key aar/localleader-julia-mode-map (kbd "r") #'julia-repl)
