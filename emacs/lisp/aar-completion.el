@@ -7,12 +7,12 @@
 ;; vertico
 (straight-use-package 'vertico)
 (setq vertico-cycle t)
-(vertico-mode)
+(add-hook 'after-init-hook #'vertico-mode)
 
 ;; savehist-mode: persist history over Emacs restarts.
 (setq savehist-file (aar/expand-cache-file-name "savehist.el"))
 (setq savehist-save-minibuffer-history t)
-(savehist-mode)
+(add-hook 'after-init-hook #'savehist-mode)
 
 ;; consult
 (straight-use-package 'consult)
@@ -31,7 +31,7 @@
 (straight-use-package 'marginalia)
 (setq marginalia-annotators '(marginalia-annotators-heavy
                               marginalia-annotators-light))
-(marginalia-mode)
+(add-hook 'after-init-hook #'marginalia-mode)
 
 ;; orderless
 (straight-use-package 'orderless)
