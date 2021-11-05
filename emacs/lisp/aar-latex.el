@@ -130,7 +130,11 @@
                                           company-auctex-macros
                                           company-reftex-labels
                                           company-reftex-citations))
-                                       company-backends)))
+                                       company-backends))
+  (font-lock-add-keywords nil  '(("\\(\\\\citep\\)\\s-*{" 1 font-lock-keyword-face t)))
+  (font-lock-add-keywords nil  '(("\\(\\\\citet\\)\\s-*{" 1 font-lock-keyword-face t)))
+  (font-latex-add-keywords '(("citep" "*[[{")) 'reference)
+  (font-latex-add-keywords '(("citet" "*[[{")) 'reference))
 
 (add-hook 'TeX-mode-hook #'aar/latex-mode-h)
 
