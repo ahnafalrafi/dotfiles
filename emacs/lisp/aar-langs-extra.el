@@ -4,15 +4,10 @@
 
 ;;; Code:
 
-;; ado-mode for stata source files
-(aar/maybe-install-package 'ado-mode)
-(require 'ado-mode)
-(add-to-list 'auto-mode-alist '("\\.ado\\'" . ado-mode))
-(add-to-list 'auto-mode-alist '("\\.do\\'" . ado-mode))
-
 ;; matlab-mode
-(aar/maybe-install-package 'matlab-mode)
+(straight-use-package 'matlab-mode)
 
+;;;###autoload
 (defun aar/matlab-mode-h ()
   (display-line-numbers-mode)
   (display-fill-column-indicator-mode))

@@ -4,9 +4,9 @@
 
 ;;; Code:
 
-(aar/maybe-install-package 'markdown-mode)
-(require 'markdown-mode)
+(straight-use-package 'markdown-mode)
 
+;;;###autoload
 (defun aar/markdown-mode-h ()
   (setq-local spell-fu-faces-exclude '(markdown-code-face
                                        font-lock-keyword-face

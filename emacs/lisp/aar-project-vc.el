@@ -12,6 +12,7 @@
 (cl-defmethod project-root ((project (head local)))
   (cdr project))
 
+;;;###autoload
 (defun aar/project-try-local (dir)
   "Determine if DIR is a non-Git project.
 DIR must include a .project file to be considered a project."
@@ -21,7 +22,7 @@ DIR must include a .project file to be considered a project."
 (with-eval-after-load 'project
   (add-to-list 'project-find-functions 'aar/project-try-local))
 
-;;; <leader> project map
+;; <leader> project map
 (define-key aar/leader-map (kbd "SPC") #'project-find-file)
 (define-key aar/leader-map (kbd "p")   project-prefix-map)
 
@@ -35,7 +36,7 @@ DIR must include a .project file to be considered a project."
 (define-key vc-prefix-map  (kbd "c") #'vc-create-repo)
 
 ;;; magit
-(aar/maybe-install-package 'magit)
+(straight-use-package 'magit)
 (setq magit-completing-read-function #'consult--read)
 
 ;; settings for transient (a magit dependency)
@@ -44,8 +45,8 @@ DIR must include a .project file to be considered a project."
 (setq transient-history-file (aar/expand-cache-file-name "transient/history"))
 
 ;;; gitgutter
-(aar/maybe-install-package 'git-gutter)
-(global-git-gutter-mode +1)
+(straight-use-package 'git-gutter)
+(add-hook 'after-init-hook #'global-git-gutter-mode)
 
 ;; A <leader> git map and bindings
 (define-prefix-command 'aar/leader-git-map)

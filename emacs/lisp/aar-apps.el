@@ -4,20 +4,21 @@
 
 ;;; Code:
 
-;;; <leader> apps map
+;;; <leader> applications map
 (define-prefix-command 'aar/leader-apps-map)
 (define-key aar/leader-map (kbd "a") 'aar/leader-apps-map)
 (which-key-add-keymap-based-replacements aar/leader-map "a" "apps")
 
 ;;; vterm
-(aar/maybe-install-package 'vterm)
+(straight-use-package 'vterm)
 (setq vterm-always-compile-module t)
 (setq vterm-buffer-name-string "vterm: %s")
 (setq vterm-copy-exclude-prompt t)
 (setq vterm-kill-buffer-on-exit t)
 (setq vterm-max-scrollback 5000)
 
-;;;;;; vterm helper functions
+;; vterm helper functions
+;;;###autoload
 (defun aar/vterm-cd-if-remote ()
   "When `default-directory` is remote, use the corresponding
 method to prepare vterm at the corresponding remote directory."
@@ -35,6 +36,7 @@ method to prepare vterm at the corresponding remote directory."
                                     (concat "cd " path-localname))
                                    (vterm-send-return)))))
 
+;;;###autoload
 (defun aar/vterm-here-other-window ()
   (interactive)
   (unless (fboundp 'module-load)
@@ -46,6 +48,7 @@ method to prepare vterm at the corresponding remote directory."
   (vterm-other-window)
   (aar/vterm-cd-if-remote))
 
+;;;###autoload
 (defun aar/vterm-here ()
   (interactive)
   (unless (fboundp 'module-load)
@@ -57,72 +60,22 @@ method to prepare vterm at the corresponding remote directory."
   (vterm)
   (aar/vterm-cd-if-remote))
 
-;;;;;; vterm hook function
+;; vterm hook function
+;;;###autoload
 (defun aar/vterm-h ()
   (setq-local show-trailing-whitespace nil))
 
 (add-hook 'vterm-mode-hook #'aar/vterm-h)
 
-;;;;;; vterm keybindings
+;; vterm keybindings
 (define-key aar/leader-apps-map (kbd "t") #'aar/vterm-here-other-window)
 (define-key aar/leader-apps-map (kbd "T") #'aar/vterm-here)
 
 ;;; jupyter
-(aar/maybe-install-package 'jupyter)
+(straight-use-package 'jupyter)
 (setq jupyter-repl-echo-eval-p t)
 (setq jupyter-repl-allow-RET-when-busy t)
-
 (define-key aar/leader-apps-map (kbd "j") #'jupyter-run-repl)
-
-;;; pdf-tools
-(aar/maybe-install-package 'pdf-tools)
-(pdf-loader-install)
-(add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
-(setq-default pdf-view-display-size 'fit-width
-              pdf-view-resize-factor 1.05)
-(push 'pdf-view-mode evil-snipe-disabled-modes)
-
-(defun aar/pdf-view-mode-h ()
-  (setq-local evil-normal-state-cursor (list nil))
-  (pdf-links-minor-mode)
-  (pdf-sync-minor-mode))
-
-(add-hook 'pdf-view-mode-hook #'aar/pdf-view-mode-h)
-
-;; Adjust load order for keybindings with evil-collection
-(with-eval-after-load 'evil-collection
-  (delete '(pdf pdf-view) evil-collection-mode-list))
-
-(with-eval-after-load 'pdf-tools
-  (evil-collection-pdf-setup)
-
-  (evil-define-key 'normal pdf-view-mode-map
-    (kbd "s")  nil
-    (kbd "sb") nil
-    (kbd "sm") nil
-    (kbd "sr") nil)
-
-  (evil-define-key 'normal pdf-view-mode-map
-    (kbd "s")     #'pdf-view-fit-width-to-window
-    (kbd "a")     #'pdf-view-fit-height-to-window
-    (kbd "H")     #'image-bob
-    (kbd "J")     #'pdf-view-next-page-command
-    (kbd "K")     #'pdf-view-previous-page-command
-    (kbd "L")     #'image-eob
-    (kbd "o")     #'pdf-outline
-    (kbd "TAB")   #'pdf-outline
-    (kbd "<tab>") #'pdf-outline
-    (kbd "C-r")   #'pdf-view-midnight-minor-mode))
-
-;; On scroll, move to beginning of page.
-(advice-add #'pdf-view-previous-page-command :after #'image-bob)
-(advice-add #'pdf-view-next-page-command :after #'image-bob)
-
-;; In case doom-modeline is being used:
-(if (fboundp 'doom-modeline-def-modeline)
-    (doom-modeline-def-modeline 'pdf
-      '(bar window-number matches pdf-pages buffer-info)
-      '(misc-info major-mode process vcs)))
 
 (provide 'aar-apps)
 ;;; aar-apps.el ends here

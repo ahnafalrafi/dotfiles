@@ -4,26 +4,15 @@
 
 ;;; Code:
 
-;;; Built-in tex-mode - just a fallback, auctex is the goto
-;; This is just configuration for a fallback
+;; Built-in tex-mode - just a fallback, auctex is the goto
 (setq tex-fontify-script nil)
 
-;;; auctex
-(aar/maybe-install-package 'auctex)
+;; auctex
+(straight-use-package 'auctex)
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 (setq TeX-save-query nil)
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
-
-(with-eval-after-load 'tex
-    (add-to-list 'TeX-expand-list
-                 '("%sn" (lambda () server-name)))
-    (add-to-list 'TeX-view-program-list
-                 '("Zathura"
-                   ("nohup zathura %o"
-                    (mode-io-correlate " --synctex-forward %n:0:%b -x \"emacsclient --socket-name=%sn --no-wait +%{line} %{input}\""))
-                   "zathura")))
-
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-mode 'synctex)
 (setq TeX-source-correlate-start-server t)
@@ -45,12 +34,12 @@
 (add-hook 'TeX-after-compilation-finished-functions-hook
           #'TeX-revert-document-buffer)
 
-;;; Completions
-(aar/maybe-install-package 'company-auctex)
-(aar/maybe-install-package 'company-reftex)
-(aar/maybe-install-package 'company-math)
+;; Completions
+(straight-use-package 'company-auctex)
+(straight-use-package 'company-reftex)
+(straight-use-package 'company-math)
 
-;;; <localleader> LaTeX-mode bindings
+;; <localleader> LaTeX-mode bindings
 (define-prefix-command 'aar/localleader-LaTeX-mode-map)
 (evil-define-key '(normal visual motion) LaTeX-mode-map
   (kbd aar/localleader-key) 'aar/localleader-LaTeX-mode-map)
@@ -81,29 +70,30 @@
 (define-key aar/LaTeX-preview-map (kbd "w")   #'preview-copy-region-as-mml)
 (define-key aar/LaTeX-preview-map (kbd "TAB") #'preview-goto-info-page)
 
-;;; auctex-latexmk
-(aar/maybe-install-package 'auctex-latexmk)
+;; auctex-latexmk
+(straight-use-package 'auctex-latexmk)
 (setq auctex-latexmk-inherit-TeX-PDF-mode t)
 
-;;; evil-tex
-(aar/maybe-install-package 'evil-tex)
+;; evil-tex
+(straight-use-package 'evil-tex)
 (setq evil-tex-toggle-override-m nil)
 (setq evil-tex-toggle-override-t t)
 
-;;; cdlatex
-(aar/maybe-install-package 'cdlatex)
+;; cdlatex
+(straight-use-package 'cdlatex)
 (setq cdlatex-sub-super-scripts-outside-math-mode nil)
 (setq cdlatex-use-dollar-to-ensure-math nil)
 (setq cdlatex-simplify-sub-super-scripts nil)
 
-;;; reftex
+;; reftex
 (setq reftex-plug-into-AUCTeX t)
 (setq reftex-toc-split-windows-fraction 0.3)
 (add-hook 'reftex-mode-hook #'evil-normalize-keymaps)
 
 (define-key aar/localleader-LaTeX-mode-map (kbd ";") #'reftex-toc)
 
-;;; Hook for tex modes
+;; Hook for tex modes
+;;;###autoload
 (defun aar/latex-mode-h ()
   (setq-local fill-nobreak-predicate nil)
   (setq-local spell-fu-faces-exclude '(font-lock-function-name-face

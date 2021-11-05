@@ -5,7 +5,7 @@
 ;;; Code:
 
 ;;; julia-mode
-(aar/maybe-install-package 'julia-mode)
+(straight-use-package 'julia-mode)
 
 ;;; <localleader> map for julia
 (define-prefix-command 'aar/localleader-julia-mode-map)
@@ -26,7 +26,7 @@
   (define-key ess-julia-mode-map (kbd "TAB") #'julia-latexsub-or-indent))
 
 ;;; julia-repl
-(aar/maybe-install-package 'julia-repl)
+(straight-use-package 'julia-repl)
 (define-key aar/localleader-julia-mode-map (kbd "r") #'julia-repl)
 (define-key aar/localleader-julia-mode-map
   (kbd "a") #'julia-repl-send-region-or-line)
@@ -37,6 +37,7 @@
 
 ;;; project.el integration - shamelessly stolen from eglot-jl
 ;; Make project.el aware of Julia projects
+;;;###autoload
 (defun aar/project-try-julia (dir)
   "Return project instance if DIR is part of a julia project.
 Otherwise returns nil"
@@ -98,6 +99,7 @@ available."
                   ,eglot-julia-language-server-script))))
 
 ;;; julia hook function
+;;;###autoload
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
   (setq-local eglot-connect-timeout 300)

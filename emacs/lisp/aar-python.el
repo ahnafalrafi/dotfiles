@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-
+;;;###autoload
 (defun aar/python-h ()
   (tree-sitter-mode)
   (rainbow-delimiters-mode)

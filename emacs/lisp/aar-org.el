@@ -4,8 +4,7 @@
 
 ;;; Code:
 
-(aar/maybe-install-package 'org)
-
+(straight-use-package 'org)
 (setq org-directory "~/Dropbox/org/")
 (setq org-default-notes-file (concat org-directory "notes.org"))
 (setq org-capture-templates
@@ -15,7 +14,6 @@
           ("n" "Personal notes" entry
            (file+headline org-default-notes-file "Inbox")
            "* %u %?\n%i\n%a" :prepend t)))
-
 (setq org-indent-mode nil)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -34,11 +32,12 @@
 (setq org-confirm-babel-evaluate #'aar/org-confirm-babel-evaluate)
 (setq org-cycle-separator-lines 1)
 
+;;;###autoload
 (defun aar/org-confirm-babel-evaluate (lang body)
   (not (string= lang "jupyter-python")))
 
-;;; evil and org
-;;;;;; Better tab: cycle only the current subtree
+;; evil and org
+;; Better tab: cycle only the current subtree
 ;;;###autoload
 (defun aar/org-cycle-only-current-subtree-h (&optional arg)
   "Toggle the local fold at the point, and no deeper.
@@ -64,22 +63,24 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
           (org-cycle-internal-local)
           t)))))
 
-;;;;;; evil-org
-(aar/maybe-install-package 'evil-org)
+;; evil-org
+(straight-use-package 'evil-org)
 
 ;;; toc-org
-(aar/maybe-install-package 'toc-org)
+(straight-use-package 'toc-org)
 (setq toc-org-hrefify-default "gh")
 
-;;; org-roam
-(aar/maybe-install-package 'org-roam)
+;; org-roam
+(straight-use-package 'org-roam)
 (setq org-roam-v2-ack t)
 (setq org-roam-directory "~/Dropbox/org-roam/")
 (unless (file-directory-p (file-truename org-roam-directory))
     (make-directory org-roam-directory))
-(org-roam-db-autosync-mode)
+;; (org-roam-db-autosync-mode)
+(add-hook 'after-init-hook #'org-roam-db-autosync-mode)
 
-;;; Hook for org-mode
+;; Hook for org-mode
+;;;###autoload
 (defun aar/org-mode-h ()
   (setq-local spell-fu-faces-exclude '(org-block
                                        org-block-begin-line
@@ -125,7 +126,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
 ;;; ob-async
-(aar/maybe-install-package 'ob-async)
+(straight-use-package 'ob-async)
 
 ;;; ob-jupyter
 (with-eval-after-load 'org-src
@@ -141,10 +142,11 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                                                      (:session . "py")
                                                      (:kernel  . "python3")))
 
-;;; ob-julia
-(add-to-list 'load-path (expand-file-name "ob-julia" aar/vendor-lisp-dir))
+;; ob-julia
+;; (straight-use-package https://github.com/nico202/ob-julia)
+;; (add-to-list 'load-path (expand-file-name "ob-julia" aar/vendor-lisp-dir))
 
-;;; with-eval-after-load statements
+;; with-eval-after-load statements
 (with-eval-after-load 'org
   (plist-put org-format-latex-options :scale 1.75)
   (plist-put org-format-latex-options :background 'default)
@@ -231,19 +233,23 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (which-key-add-keymap-based-replacements aar/leader-map "o" "org")
 
 ;;;;;; Functions
+;;;###autoload
 (defun aar/find-file-in-org-directory ()
   (interactive)
   (let ((default-directory org-directory))
     (call-interactively #'find-file)))
 
+;;;###autoload
 (defun aar/jump-to-todo-file ()
   (interactive)
   (find-file (expand-file-name "todo.org" org-directory)))
 
+;;;###autoload
 (defun aar/jump-to-bookmarks-file ()
   (interactive)
   (find-file (expand-file-name "bookmarks.org" org-directory)))
 
+;;;###autoload
 (defun aar/jump-to-readinglist-file ()
   (interactive)
   (find-file (expand-file-name "readinglist.org" org-directory)))

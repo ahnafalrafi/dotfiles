@@ -8,16 +8,16 @@
 (if (>= emacs-major-version 28)
     (evil-set-undo-system 'undo-redo)
 
-  (aar/maybe-install-package 'undo-fu)
-  (aar/maybe-install-package 'undo-fu-session)
+  (straight-use-package 'undo-fu)
+  (straight-use-package 'undo-fu-session)
   (setq undo-fu-session-incompatible-files '("/COMMIT_EDITMSG\\'"
                                              "/git-rebase-todo\\'"))
   (global-undo-fu-session-mode 1)
   (evil-set-undo-system 'undo-fu))
 
 ;;; Indentation guides
-(aar/maybe-install-package 'highlight-indent-guides)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(straight-use-package 'highlight-indent-guides)
+(add-hook 'prog-mode-hook #'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
 (setq highlight-indent-guides-responsive 'stack)
 
@@ -25,7 +25,6 @@
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
-
 (setq-default evil-shift-width standard-indent)
 
 ;;; New lines at EOF
@@ -33,7 +32,7 @@
 (setq-default mode-require-final-newline t)
 (setq-default log-edit-require-final-newline nil)
 
-;; Long lines
+;;; Long lines
 (setq-default fill-column 80)
 (setq-default word-wrap t)
 (setq-default truncate-lines t)
@@ -43,7 +42,7 @@
 (setq electric-indent-inhibit t)
 
 ;;; adaptive-wrap
-(aar/maybe-install-package 'adaptive-wrap)
+(straight-use-package 'adaptive-wrap)
 (setq-default adaptive-wrap-extra-indent 0)
 
 ;;; paren
@@ -51,36 +50,34 @@
 (setq show-paren-highlight-openparen t)
 (setq show-paren-when-point-inside-paren t)
 (setq show-paren-when-point-in-periphery t)
-(show-paren-mode 1)
+(add-hook 'after-init-hook #'show-paren-mode)
 
 ;;; elec-pair
-(electric-pair-mode 1)
+(add-hook 'after-init-hook #'electric-pair-mode)
 
 ;;; evil-surround
-(aar/maybe-install-package 'evil-surround)
-(require 'evil-surround)
-(global-evil-surround-mode 1)
+(straight-use-package 'evil-surround)
+(add-hook 'after-init-hook #'global-evil-surround-mode)
 
 ;;; evil-matchit
-(aar/maybe-install-package 'evil-matchit)
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
+;; (straight-use-package 'evil-matchit)
+;; (add-hook 'after-init-hook #'global-evil-matchit-mode)
 
 ;;; rainbow-delimiters
-(aar/maybe-install-package 'rainbow-delimiters)
+(straight-use-package 'rainbow-delimiters)
 
 ;;; Whitespaces
 (setq-default show-trailing-whitespace t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 ;;; Snippets
-(aar/maybe-install-package 'yasnippet)
+(straight-use-package 'yasnippet)
 (setq yas-indent-line 'auto)
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs (expand-file-name "snippets/"
-                                                 user-emacs-directory))
-(yas-global-mode t)
-(defvaralias '% 'yas-selected-text)
+(add-hook 'after-init-hook #'yas-global-mode)
+(with-eval-after-load 'yasnippet
+  (add-to-list 'yas-snippet-dirs (expand-file-name "snippets/"
+                                                   user-emacs-directory))
+  (defvaralias '% 'yas-selected-text))
 
 (provide 'aar-editor)
 ;;; aar-editor.el ends here

@@ -21,6 +21,7 @@
 (add-to-list 'auto-mode-alist '("\\.link\\'" . conf-unix-mode))
 
 ;;; elisp
+;;;###autoload
 (defun aar/elisp-mode-h ()
   (rainbow-delimiters-mode +1)
   (setq-local tab-width 8)
@@ -29,16 +30,15 @@
 (add-hook 'emacs-lisp-mode-hook #'aar/elisp-mode-h)
 
 ;;; vimrc
-(aar/maybe-install-package 'vimrc-mode)
+(straight-use-package 'vimrc-mode)
 (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 
 ;;; lua
-(aar/maybe-install-package 'lua-mode)
+(straight-use-package 'lua-mode)
 (add-hook 'lua-mode #'eglot-ensure)
 
 ;;; nix
-(aar/maybe-install-package 'nix-mode)
-(require 'nix-mode)
+(straight-use-package 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
 (provide 'aar-langs-config)

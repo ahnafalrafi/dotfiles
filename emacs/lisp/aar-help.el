@@ -4,11 +4,11 @@
 
 ;;; Code:
 
-;;; <leader> bindings for help
+;; <leader> bindings for help
 (define-key aar/leader-map (kbd "h") help-map)
 
-;;; helpful
-(aar/maybe-install-package 'helpful)
+;; helpful
+(straight-use-package 'helpful)
 (add-hook 'helpful-mode-hook #'display-line-numbers-mode)
 (add-hook 'helpful-mode-hook #'visual-line-mode)
 
@@ -19,20 +19,20 @@
 (global-set-key [remap describe-symbol]   #'helpful-symbol)
 (global-set-key [remap apropos-command]   #'consult-apropos)
 
-;;; elisp-demos
-(aar/maybe-install-package 'elisp-demos)
+;; elisp-demos
+(straight-use-package 'elisp-demos)
 (advice-add 'describe-function-1
             :after #'elisp-demos-advice-describe-function-1)
 (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
 
-;;; Hooks
+;; Hooks
+;;;###autoload
 (defun aar/help-mode-h ()
   (setq-local show-trailing-whitespace nil)
 
   (visual-line-mode)
   (display-line-numbers-mode))
 
-;;; Some common stuff
 (dolist (hook '(Info-mode-hook help-mode-hook))
   (add-hook hook #'aar/help-mode-h))
 

@@ -4,15 +4,14 @@
 
 ;;; Code:
 
-;;; ispell
+;; ispell
 (setq ispell-dictionary "english")
 (setq ispell-personal-dictionary (aar/expand-etc-file-name "ispell_personal"))
 (setq ispell-local-dictionary-alist `((nil "[[:alpha:]]" "[^[:alpha:]]"
                                            "['\x2019]" nil ("-B") nil utf-8)))
-(global-set-key [remap ispell-word] #'aar/spell-correct)
 
-;;; spell-fu
-(aar/maybe-install-package 'spell-fu)
+;; spell-fu
+(straight-use-package 'spell-fu)
 (setq spell-fu-directory (aar/expand-etc-file-name "spell-fu"))
 
 (evil-define-key 'normal 'global
@@ -22,7 +21,7 @@
 
 (add-hook 'text-mode-hook #'spell-fu-mode)
 
-;;; Minibuffer spelling correction completion functions
+;; Minibuffer spelling correction completion functions
 ;;;###autoload
 (defun aar/spell-correct-completion-fn (candidates word)
   (completing-read (format "Corrections for %S: " word) candidates))
@@ -122,6 +121,9 @@
               (unless (string-equal wrd word)
                 (aar/spell-replace wrd poss word orig-pt start end))))))
         (ispell-pdict-save t))))))
+
+;; Keybinding
+(global-set-key [remap ispell-word] #'aar/spell-correct)
 
 (provide 'aar-spelling)
 ;;; aar-spelling.el ends here
