@@ -38,6 +38,7 @@
 
 ;; evil and org
 ;; Better tab: cycle only the current subtree
+;; Shamelessly stolen from doom-emacs.
 ;;;###autoload
 (defun aar/org-cycle-only-current-subtree-h (&optional arg)
   "Toggle the local fold at the point, and no deeper.
@@ -62,9 +63,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
             (setq org-cycle-subtree-status 'subtree))
           (org-cycle-internal-local)
           t)))))
-
-;; evil-org
-(straight-use-package 'evil-org)
 
 ;;; toc-org
 (straight-use-package 'toc-org)
@@ -108,14 +106,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
-
-  (require 'evil-org)
-  (setq evil-org-retain-visual-state-on-shift t)
-  (add-hook 'evil-org-mode-hook #'evil-org-set-key-theme)
-  (evil-org-mode 1)
-
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys)
   (toc-org-enable)
 
   (if (fboundp 'turn-on-org-cdlatex)
@@ -219,13 +209,24 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (define-key aar/localleader-org-mode-map (kbd "a") #'org-latex-export-to-pdf)
 (define-key aar/localleader-org-mode-map (kbd "t") #'org-toggle-checkbox)
 
+(evil-define-motion evil-org-top ()
+  "Find the nearest one-star heading."
+  :type exclusive
+  :jump t
+  (while (org-up-heading-safe)))
+
 (evil-define-key '(normal visual motion) org-mode-map
   (kbd "[ h") #'org-backward-heading-same-level
   (kbd "] h") #'org-forward-heading-same-level
   (kbd "[ l") #'org-previous-link
   (kbd "] l") #'org-next-link
   (kbd "[ c") #'org-babel-previous-src-block
-  (kbd "] c") #'org-babel-next-src-block)
+  (kbd "] c") #'org-babel-next-src-block
+  (kbd "g h") #'org-up-element
+  (kbd "g l") #'org-down-element
+  (kbd "g k") #'org-backward-element
+  (kbd "g j") #'org-forward-element
+  (kbd "g H") #'evil-org-top)
 
 ;;; <leader> map and bindings for org-related stuff
 (define-prefix-command 'aar/leader-org-map)
