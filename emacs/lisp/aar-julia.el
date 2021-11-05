@@ -59,7 +59,7 @@ The project should have LanguageServer and SymbolServer packages
 available.")
 
 (setq lsp-julia-package-dir nil)
-(setq lsp-julia-default-environment "~/.julia/environments/v1.6")
+(setq lsp-julia-default-environment (car (last (file-expand-wildcards "~/.julia/environments/v*" t))))
 (setq lsp-julia-flags `("--startup-file=no"
                         "--history-file=no"
                         ,(concat "--project="
