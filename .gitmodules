@@ -1,3 +1,0 @@
-[submodule "emacs/vendor-lisp/ob-julia"]
-	path = emacs/vendor-lisp/ob-julia
-	url = https://github.com/nico202/ob-julia
