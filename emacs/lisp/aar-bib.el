@@ -52,6 +52,8 @@
                                         "Inside"  "inside"
                                         "Into"    "into"
                                         "Is"      "is"
+                                        "It"      "it"
+                                        "Its"      "its"
                                         "Like"    "like"
                                         "Near"    "near"
                                         "Of"      "of"
