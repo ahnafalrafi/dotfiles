@@ -103,6 +103,7 @@
                                        font-latex-math-face
                                        font-latex-sedate-face
                                        font-latex-warning-face
+                                       font-lock-type-face
                                        button
                                        eglot-highlight-symbol-face))
   (setq-local TeX-command-default "LatexMk")
