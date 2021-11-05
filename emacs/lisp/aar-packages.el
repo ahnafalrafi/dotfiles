@@ -4,73 +4,32 @@
 
 ;;; Code:
 
-;; Set up directory for package.el
-(setq package-user-dir (aar/expand-cache-file-name "elpa"))
+;; Set up directory for straight.el and tell it to pull from the develop branch
+(setq straight-base-dir aar/cache-dir)
+(setq straight-repository-branch "develop")
 
-;; Enable native compilation of packages when it's available
-(when (featurep 'native-compile)
-  (setq package-native-compile t))
+;; If watchexec and Python are installed, use file watchers to detect
+;; package modifications. This saves time at startup. Otherwise, use find.
+;; (if (and (executable-find "watchexec")
+;;          (executable-find "python3"))
+;;     (setq straight-check-for-modifications '(watch-files find-when-checking))
+;;   (setq straight-check-for-modifications '(check-on-save find-when-checking)))
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
 
-;; Initialize package sources
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" aar/cache-dir))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-(defun aar/maybe-install-package (pkg)
-  "Install package PKG from one of the `package-archives'.
-
-First checks to see if the symbol PKG is a built-in package. If not, a standard
-`package-refresh-contents' followed by `package-install' is carried out if PKG
-is not already installed. Otherwise, check to see if a version of PKG exists in
-`package-user-dir' and if not, carry out `package-refresh-contents' followed by
-a forced `package-install' specifically from `package-archives' (i.e. ignore the
-fact that PKG is built-in)."
-  (if (not (package-built-in-p pkg))
-      ;; Most packages don't need the special installation instructions
-      (unless (package-installed-p pkg)
-        (package-refresh-contents)
-        (package-install pkg))
-    ;; Special case for installing built-in packages from repositories.
-    ;; See this link in use-package issues:
-    ;; https://github.com/jwiegley/use-package/issues/319#issuecomment-363981027
-    (unless (file-expand-wildcards
-             (concat package-user-dir "/" (symbol-name pkg) "-[0-9]*"))
-      (package-refresh-contents)
-      (package-install (elt (cdr (assoc pkg package-archive-contents)) 0))))
-
-  (add-to-list 'package-selected-packages pkg 'append))
-
-;; Upgrade installed packages
-;; Inspired from paradox.el, extracted from:
-;; https://www.reddit.com/r/emacs/comments/3m5tqx/can_usepackage_upgrade_installed_packages/
-(defun aar/package-upgrade-packages (&optional no-fetch)
-  "Upgrade all packages.  No questions asked.
-This function is equivalent to `list-packages', followed by a
-`package-menu-mark-upgrades'     and a `package-menu-execute'.      Except
-the user isn't asked to confirm deletion of packages.
-The NO-FETCH prefix argument is passed to `list-packages'.  It
-prevents re-download of information about new versions.  It does
-not prevent downloading the actual packages (obviously)."
-  (interactive "P")
-  (let ((package-menu-async nil)) ; This variable was introduced in emacs 25.0
-    (save-window-excursion
-      (package-list-packages no-fetch)
-      (package-menu-mark-upgrades)
-      (package-menu-execute 'noquery))))
-
-;; vendor-lisp: Packages from non-(M)ELPA sources
-(defconst aar/vendor-lisp-dir
-  (aar/expand-cache-file-name "vendor-lisp/")
-  "Directory containing lisp files from non-(M)ELPA sources.")
-
-(unless (file-directory-p aar/vendor-lisp-dir)
-    (make-directory aar/vendor-lisp-dir))
-
-;; TODO: add API to use with `aar/maybe-install-package'
+(require 'straight-x)
 
 (provide 'aar-packages)
 ;;; aar-packages.el ends here
