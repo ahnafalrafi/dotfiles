@@ -95,6 +95,9 @@ the minibuffer prompt."
 (with-eval-after-load 'wdired
   (define-key wdired-mode-map [remap save-buffer] #'wdired-finish-edit))
 
+(with-eval-after-load 'dired
+  (require 'dired-x))
+
 ;;;;;; dired-single
 (aar/maybe-install-package 'dired-single)
 
