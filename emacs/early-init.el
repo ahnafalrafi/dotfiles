@@ -8,9 +8,7 @@
 (setq package-enable-at-startup nil)
 
 ;; Defer garbage collection
-(setq gc-cons-threshold most-positive-fixnum)
-
-(setq load-prefer-newer t)
+(setq gc-cons-threshold (* 80 1024 1024))
 
 ;; Disable gui elements before they are initialized.
 (when (featurep 'menu-bar)
