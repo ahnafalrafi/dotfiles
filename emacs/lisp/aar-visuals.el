@@ -31,19 +31,13 @@
 (setq doom-themes-enable-bold t)
 (setq doom-themes-enable-italic t)
 
-(defvar aar/theme 'doom-gruvbox)
-
 ;;;###autoload
 (defun aar/load-theme ()
   "Wrapper function around commands for loading theme."
-  ;; Global settings (defaults)
-  (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-gruvbox t)
-  ;; (load-theme 'doom-dracula t)
-  ;; (set-face-attribute 'vertical-border nil
-  ;;                     :foreground "#6272a4"
-  ;;                     :background "#6272a4")
-  )
+  (load-theme 'doom-dracula t)
+  (set-face-attribute 'vertical-border nil
+                      :foreground "#6272a4"
+                      :background "#6272a4"))
 
 ;;;###autoload
 (defun aar/load-theme-after-frame-h (frame)
