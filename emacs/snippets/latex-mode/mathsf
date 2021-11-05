@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathsf
+# uuid: sf
+# key: sf
+# condition: t
+# --
+\mathsf{`%`$1}$0
