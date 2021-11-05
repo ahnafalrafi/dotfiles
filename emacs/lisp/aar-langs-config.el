@@ -39,7 +39,6 @@
 
 ;;; nix
 (straight-use-package 'nix-mode)
-(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 
 (provide 'aar-langs-config)
 ;;; aar-langs-config.el ends here
