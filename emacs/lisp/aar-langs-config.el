@@ -39,6 +39,7 @@
 
 ;;; nix
 (straight-use-package 'nix-mode)
+(add-hook 'nix-mode #'lsp-deferred)
 
 (provide 'aar-langs-config)
 ;;; aar-langs-config.el ends here
