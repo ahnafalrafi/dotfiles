@@ -27,16 +27,26 @@
 ;; Clipboard/kill-ring
 (setq kill-do-not-save-duplicates t)
 
-;; Auto-saves, backups and lockfiles
-(setq auto-save-default nil)
-(setq make-backup-files nil)
-(setq create-lockfiles nil)
-
 ;; Disable the alarm bell
 (setq ring-bell-function 'ignore)
 
+;; Auto-saves, backups and lockfiles
+;; Auto-save transforms
+(setq auto-save-default t)
+(setq auto-save-list-file-prefix (aar/expand-cache-file-name "autosave/")
+      auto-save-file-name-transforms
+      (list (list "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
+                  ; Prefix tramp auto-saves to prevent conflicts
+                  (concat auto-save-list-file-prefix "tramp-\\2") t)
+            (list ".*" auto-save-list-file-prefix t)))
+(setq make-backup-files nil)
+(setq create-lockfiles nil)
+
 ;; Bookmarks
 (setq bookmark-default-file (aar/expand-cache-file-name "bookmarks.el"))
+
+;; Set file for custom.el to use
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;;;  Load configuration files
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
