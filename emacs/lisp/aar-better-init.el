@@ -5,29 +5,17 @@
 ;;; Code:
 
 ;;; gcmh
-(aar/maybe-install-package 'gcmh)
+(straight-use-package 'gcmh)
 
 (setq gcmh-idle-delay 5)
-(setq gcmh-high-cons-threshold (* 16 1024 1024))
+(setq gcmh-high-cons-threshold (* 100 1024 1024))
 (setq read-process-output-max (* (* 1024 1024) 8))
 (setq gcmh-verbose init-file-debug)
 (require 'gcmh)
 (gcmh-mode 1)
 
-;; Auto-save transforms
-(setq auto-save-list-file-prefix (aar/expand-cache-file-name "autosave/")
-      auto-save-file-name-transforms
-      (list (list "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
-                  ; Prefix tramp auto-saves to prevent conflicts
-                  (concat auto-save-list-file-prefix "tramp-\\2") t)
-            (list ".*" auto-save-list-file-prefix t)))
-
-;; Set file for custom.el to use
-(setq custom-file (aar/expand-etc-file-name "custom.el"))
-
 ;;; Dashboard
-(aar/maybe-install-package 'page-break-lines)
-(aar/maybe-install-package 'dashboard)
+(straight-use-package 'dashboard)
 
 (setq dashboard-set-heading-icons nil)
 (setq dashboard-set-file-icons nil)
