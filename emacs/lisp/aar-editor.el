@@ -15,12 +15,6 @@
   (global-undo-fu-session-mode 1)
   (evil-set-undo-system 'undo-fu))
 
-;;; Indentation guides
-(straight-use-package 'highlight-indent-guides)
-(add-hook 'prog-mode-hook #'highlight-indent-guides-mode)
-(setq highlight-indent-guides-method 'character)
-(setq highlight-indent-guides-responsive 'stack)
-
 ;;; Indentation widths
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
