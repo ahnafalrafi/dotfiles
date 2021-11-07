@@ -112,6 +112,31 @@ the minibuffer prompt."
     (kbd "h") #'dired-single-up-directory
     (kbd "l") #'dired-single-buffer))
 
+;; Open certain files in external processes.
+;;;###autoload
+(defun aar/xdg-open (filename)
+  "Open the file FILENAME in exter-externallynal application using `xdg-open'."
+  (interactive "fFilename: ")
+  (let ((process-connection-type nil))
+    ;; (start-process "" nil "xdg-open" (expand-file-name filename))
+    (call-process "xdg-open" nil 0 nil (expand-file-name filename))))
+
+(defvar aar/xdg-open-filetypes '("\\.pdf\\'" "\\.docx?\\'"))
+
+;;;###autoload
+(defun aar/find-file-auto (orig-fun &rest args)
+  "Advice for `find-file': if file has extension in `aar/xdg-open-filetypes',
+then open in external application using `aar/xdg-open'. Otherwise, go with
+default behavior."
+  (let ((filename (car args)))
+    (if (cl-find-if
+         (lambda (regexp) (string-match regexp filename))
+         aar/open-externally-filetypes)
+        (aar/open-externally filename)
+      (apply orig-fun args))))
+
+(advice-add 'find-file :around #'aar/find-file-auto)
+
 ;; all-the-icons-dired
 (straight-use-package 'all-the-icons-dired)
 (add-hook 'dired-mode-hook #'all-the-icons-dired-mode)
