@@ -13,8 +13,6 @@
 
 (setq TeX-save-query nil)
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
-(setq TeX-source-correlate-mode t)
-(setq TeX-source-correlate-mode 'synctex)
 (setq TeX-source-correlate-start-server t)
 (setq TeX-electric-sub-and-superscript t)
 (setq LaTeX-indent-environment-list nil)
@@ -30,6 +28,10 @@
 (setq font-latex-fontify-sectioning 'color)
 (with-eval-after-load 'font-latex
   (set-face-foreground 'font-latex-script-char-face nil))
+
+(with-eval-after-load 'tex
+  (require 'auctex-latexmk)
+  (auctex-latexmk-setup))
 
 (add-hook 'TeX-after-compilation-finished-functions-hook
           #'TeX-revert-document-buffer)
@@ -106,11 +108,10 @@
                                        font-lock-type-face
                                        button))
   (setq-local TeX-command-default "LatexMk")
+  (TeX-source-correlate-mode 1)
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
-  (require 'auctex-latexmk)
-  (auctex-latexmk-setup)
   (evil-tex-mode)
   (turn-on-cdlatex)
   (reftex-mode)
