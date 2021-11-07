@@ -31,29 +31,26 @@
 (setq doom-themes-enable-bold t)
 (setq doom-themes-enable-italic t)
 
-;;;###autoload
 (defun aar/load-theme ()
   "Wrapper function around commands for loading theme."
   (load-theme 'doom-dracula t)
   (set-face-attribute 'vertical-border nil
                       :foreground "#6272a4"
-                      :background "#6272a4"))
+                      :background "#6272a4")
 
-;;;###autoload
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 (defun aar/load-theme-after-frame-h (frame)
   "Load theme after the frame has been made.
 Useful for loading themes properly in daemon mode"
   (with-selected-frame frame
     (aar/load-theme)))
 
-(if (daemonp)
-    (add-hook 'after-make-frame-functions #'aar/load-theme-after-frame-h)
-  (aar/load-theme))
-
-;; Enable flashing mode-line on errors
-(doom-themes-visual-bell-config)
-;; Corrects (and improves) org-mode's native fontification.
-(doom-themes-org-config)
+(add-hook 'after-init-hook #'aar/load-theme)
+(add-hook 'after-make-frame-functions #'aar/load-theme-after-frame-h)
 
 ;;; Icons
 (straight-use-package 'all-the-icons)
