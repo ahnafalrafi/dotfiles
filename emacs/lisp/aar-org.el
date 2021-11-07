@@ -72,6 +72,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (straight-use-package 'org-roam)
 (setq org-roam-v2-ack t)
 (setq org-roam-directory "~/Dropbox/org-roam/")
+(setq org-roam-db-location (aar/expand-cache-file-name "org-roam.db"))
 (unless (file-directory-p (file-truename org-roam-directory))
     (make-directory org-roam-directory))
 ;; (org-roam-db-autosync-mode)
