@@ -131,8 +131,8 @@ default behavior."
   (let ((filename (car args)))
     (if (cl-find-if
          (lambda (regexp) (string-match regexp filename))
-         aar/open-externally-filetypes)
-        (aar/open-externally filename)
+         aar/xdg-open-filetypes)
+        (aar/xdg-open filename)
       (apply orig-fun args))))
 
 (advice-add 'find-file :around #'aar/find-file-auto)
