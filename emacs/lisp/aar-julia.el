@@ -73,7 +73,6 @@ available.")
 ;;;###autoload
 (defun aar/julia-mode-h ()
   (julia-repl-mode)
-  (tree-sitter-hl-mode)
   (require 'lsp-julia)
   (lsp-deferred))
 (add-hook 'julia-mode-hook #'aar/julia-mode-h)
