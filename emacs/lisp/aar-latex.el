@@ -94,6 +94,12 @@
 
 (define-key aar/localleader-LaTeX-mode-map (kbd ";") #'reftex-toc)
 
+;; Automatically compile on save
+;;;###autoload
+(defun aar/latex-default-compile-on-master ()
+  "Run `TeX-command-default' on `TeX-master' for current buffer."
+  (TeX-command TeX-command-default #'TeX-master-file))
+
 ;; Hook for tex modes
 ;;;###autoload
 (defun aar/latex-mode-h ()
@@ -125,7 +131,8 @@
   (font-lock-add-keywords nil  '(("\\(\\\\citep\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-lock-add-keywords nil  '(("\\(\\\\citet\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-latex-add-keywords '(("citep" "*[[{")) 'reference)
-  (font-latex-add-keywords '(("citet" "*[[{")) 'reference))
+  (font-latex-add-keywords '(("citet" "*[[{")) 'reference)
+  (add-hook 'after-save-hook #'aar/latex-default-compile-on-master 0 t))
 
 (add-hook 'TeX-mode-hook #'aar/latex-mode-h)
 
