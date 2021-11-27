@@ -73,6 +73,9 @@
 (define-key evil-window-map (kbd "C-f") #'ffap-other-window)
 
 ;;; Frames
+;; Maximize new frames
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Frame title: tell me if I am in daemon mode
 (setq frame-title-format (if (daemonp)
                              '("AAR DaEmacs - %b")
