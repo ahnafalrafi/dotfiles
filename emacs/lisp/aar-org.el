@@ -32,10 +32,6 @@
 (setq org-confirm-babel-evaluate #'aar/org-confirm-babel-evaluate)
 (setq org-cycle-separator-lines 1)
 
-;;;###autoload
-(defun aar/org-confirm-babel-evaluate (lang body)
-  (not (string= lang "jupyter-python")))
-
 ;; evil and org
 ;; Better tab: cycle only the current subtree
 ;; Shamelessly stolen from doom-emacs.
@@ -119,24 +115,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 ;;; ob-async
 (straight-use-package 'ob-async)
 
-;;; ob-jupyter
-(with-eval-after-load 'org-src
-  (dolist (lang '(python julia R))
-    (cl-pushnew (cons (format "jupyter-%s" lang) lang)
-                org-src-lang-modes :key #'car)))
-(with-eval-after-load 'ob-async
-  (dolist (lang '(python julia R))
-    (cl-pushnew (format "jupyter-%s" lang)
-                ob-async-no-async-languages-alist)))
-
-(setq org-babel-default-header-args:jupyter-python '((:async   . "yes")
-                                                     (:session . "py")
-                                                     (:kernel  . "python3")))
-
-;; ob-julia
-;; (straight-use-package https://github.com/nico202/ob-julia)
-;; (add-to-list 'load-path (expand-file-name "ob-julia" aar/vendor-lisp-dir))
-
 ;; with-eval-after-load statements
 (with-eval-after-load 'org
   (plist-put org-format-latex-options :scale 1.75)
@@ -146,9 +124,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
    '((emacs-lisp . t)
      (shell . t)
      (R . t)
-     (python . t)
-     ;; (julia . t)
-     (jupyter . t))))
+     (python . t)))
 
 (with-eval-after-load 'ox-latex
   ;; Configuration
@@ -160,12 +136,6 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
                    "-pdf "
                    "-bibtex "
                    "-f %f")))
-
-  (setq org-latex-listings-langs '((jupyter-python "Python")
-                                   (emacs-lisp "common-lisp")
-                                   (elisp "common-lisp")
-                                   (cc "c++")
-                                   (shell-script "bash")))
 
   (add-to-list 'org-latex-classes
                `("aar-article"
