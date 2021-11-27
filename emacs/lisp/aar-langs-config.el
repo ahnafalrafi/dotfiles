@@ -35,6 +35,8 @@
 
 ;;; lua
 (straight-use-package 'lua-mode)
+(setq lua-indent-level 2)
+(setq lua-indent-nested-block-content-align nil)
 (add-hook 'lua-mode #'lsp-deferred)
 
 ;;; nix
