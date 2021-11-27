@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mathscr
+# uuid: scr
+# key: scr
+# condition: t
+# --
+\mathscr{`%`$1}$0
