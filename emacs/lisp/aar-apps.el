@@ -71,11 +71,5 @@ method to prepare vterm at the corresponding remote directory."
 (define-key aar/leader-apps-map (kbd "t") #'aar/vterm-here-other-window)
 (define-key aar/leader-apps-map (kbd "T") #'aar/vterm-here)
 
-;;; jupyter
-(straight-use-package 'jupyter)
-(setq jupyter-repl-echo-eval-p t)
-(setq jupyter-repl-allow-RET-when-busy t)
-(define-key aar/leader-apps-map (kbd "j") #'jupyter-run-repl)
-
 (provide 'aar-apps)
 ;;; aar-apps.el ends here
