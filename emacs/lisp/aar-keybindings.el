@@ -11,11 +11,6 @@
 (which-key-mode)
 (which-key-setup-side-window-bottom)
 
-;;; key-chord
-(straight-use-package 'key-chord)
-(require 'key-chord)
-(key-chord-mode 1)
-
 ;;; evil
 (straight-use-package 'evil)
 (setq evil-want-integration t)
@@ -61,10 +56,22 @@
 (global-set-key (kbd "C-_") #'text-scale-decrease)
 (global-set-key (kbd "C-)") #'text-scale-adjust)
 
+;; ;;; key-chord
+;; (straight-use-package 'key-chord)
+;; (require 'key-chord)
+;; (key-chord-mode 1)
+
 ;; Key chords for reverting to normal mode
-(key-chord-define evil-insert-state-map  "fd" #'evil-normal-state)
-(key-chord-define evil-replace-state-map "fd" #'evil-normal-state)
-(key-chord-define evil-emacs-state-map   "fd" #'evil-normal-state)
+;; (key-chord-define evil-insert-state-map  "fd" #'evil-normal-state)
+;; (key-chord-define evil-replace-state-map "fd" #'evil-normal-state)
+;; (key-chord-define evil-emacs-state-map   "fd" #'evil-normal-state)
+
+;;; evil-escape
+(straight-use-package '(evil-escape :type git
+                                    :host github
+                                    :repo "hlissner/evil-escape"))
+
+(add-hook 'after-init-hook #'evil-escape-mode)
 
 ;; Universal arguments with evil
 (global-set-key (kbd "C-M-u") 'universal-argument)
