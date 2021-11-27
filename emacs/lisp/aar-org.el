@@ -125,6 +125,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
      (shell . t)
      (R . t)
      (python . t)))
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s")))
 
 (with-eval-after-load 'ox-latex
   ;; Configuration
