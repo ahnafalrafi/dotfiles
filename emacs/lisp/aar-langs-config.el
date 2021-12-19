@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-;;; conf-mode
+;; conf-mode
 (add-hook 'conf-mode-hook #'display-line-numbers-mode)
 (add-hook 'conf-mode-hook #'display-fill-column-indicator-mode)
 
@@ -20,7 +20,7 @@
 (add-to-list 'auto-mode-alist '("\\.network\\'" . conf-unix-mode))
 (add-to-list 'auto-mode-alist '("\\.link\\'" . conf-unix-mode))
 
-;;; elisp
+;; elisp
 ;;;###autoload
 (defun aar/elisp-mode-h ()
   (rainbow-delimiters-mode +1)
@@ -29,17 +29,20 @@
 
 (add-hook 'emacs-lisp-mode-hook #'aar/elisp-mode-h)
 
-;;; vimrc
+;; vimrc
 (straight-use-package 'vimrc-mode)
 (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 
-;;; lua
+;; lua
 (straight-use-package 'lua-mode)
 (setq lua-indent-level 2)
 (setq lua-indent-nested-block-content-align nil)
 (add-hook 'lua-mode #'lsp-deferred)
 
-;;; nix
+;; yaml
+(straight-use-package 'yaml-mode)
+
+;; nix
 (straight-use-package 'nix-mode)
 (add-hook 'nix-mode #'lsp-deferred)
 

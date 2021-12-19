@@ -4,17 +4,17 @@
 
 ;;; Code:
 
-;;; julia-mode
+;; julia-mode
 (straight-use-package 'julia-mode)
 
-;;; <localleader> map for julia
+;; <localleader> map for julia
 (define-prefix-command 'aar/localleader-julia-mode-map)
 (evil-define-key '(normal visual motion) julia-mode-map
   (kbd aar/localleader-key) 'aar/localleader-julia-mode-map)
 (evil-define-key '(insert emacs) julia-mode-map
   (kbd aar/localleader-alt-key) 'aar/localleader-julia-mode-map)
 
-;;; julia-repl
+;; julia-repl
 (straight-use-package 'julia-repl)
 (define-key aar/localleader-julia-mode-map (kbd "r") #'julia-repl)
 (define-key aar/localleader-julia-mode-map
@@ -24,7 +24,7 @@
 (with-eval-after-load 'julia-repl
   (julia-repl-set-terminal-backend 'vterm))
 
-;;; project.el integration - shamelessly stolen from eglot-jl
+;; project.el integration - shamelessly stolen from eglot-jl
 ;; Make project.el aware of Julia projects
 ;;;###autoload
 (defun aar/project-try-julia (dir)
@@ -69,7 +69,7 @@ available.")
                              (concat "--sysimage=" aar/julia-sysimage))
                         "--sysimage-native-code=yes"))
 
-;;; julia hook function
+;; julia hook function
 ;;;###autoload
 (defun aar/julia-mode-h ()
   (julia-repl-mode)

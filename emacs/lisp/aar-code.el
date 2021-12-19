@@ -22,7 +22,7 @@
 ;; I hate LaTeX syntax checking and so will disable this preemptively.
 (setq-default flycheck-disabled-checkers '(tex-chktex tex-lacheck))
 
-;;; tree-sitter
+;; tree-sitter
 (straight-use-package 'tree-sitter)
 (straight-use-package 'tree-sitter-langs)
 (add-hook 'after-init-hook
@@ -31,7 +31,7 @@
             (require 'tree-sitter-langs)
             (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)))
 
-;;; lsp-mode
+;; lsp-mode
 (straight-use-package 'lsp-mode)
 (straight-use-package 'lsp-ui)
 
