@@ -55,9 +55,9 @@
 (require 'aar-better-init)
 (require 'aar-keybindings)
 (require 'aar-visuals)
+(require 'aar-bufwinframes)
 (require 'aar-completion)
 (require 'aar-files)
-(require 'aar-bufwinframes)
 (require 'aar-help)
 
 (require 'aar-editor)
@@ -67,6 +67,7 @@
 (require 'aar-spelling)
 (require 'aar-apps)
 
+(require 'aar-cc)
 (require 'aar-ess)
 (require 'aar-julia)
 (require 'aar-python)
