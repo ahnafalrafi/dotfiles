@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-;;; Undo/Redo
+;; Undo/Redo
 (if (>= emacs-major-version 28)
     (evil-set-undo-system 'undo-redo)
 
@@ -15,56 +15,56 @@
   (global-undo-fu-session-mode 1)
   (evil-set-undo-system 'undo-fu))
 
-;;; Indentation widths
+;; Indentation widths
 (setq-default standard-indent 2)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
 (setq-default evil-shift-width standard-indent)
 
-;;; New lines at EOF
+;; New lines at EOF
 (setq-default require-final-newline nil)
 (setq-default mode-require-final-newline t)
 (setq-default log-edit-require-final-newline nil)
 
-;;; Long lines
+;; Long lines
 (setq-default fill-column 80)
 (setq-default word-wrap t)
 (setq-default truncate-lines t)
 
-;;; electric-indent
+;; electric-indent
 ;; See: https://emacs.stackexchange.com/questions/20896/change-the-behaviour-of-ret-with-electric-indent-to-only-indent-the-new-line
 (setq electric-indent-inhibit t)
 
-;;; adaptive-wrap
+;; adaptive-wrap
 (straight-use-package 'adaptive-wrap)
 (setq-default adaptive-wrap-extra-indent 0)
 
-;;; paren
+;; paren
 (setq show-paren-delay 0)
 (setq show-paren-highlight-openparen t)
 (setq show-paren-when-point-inside-paren t)
 (setq show-paren-when-point-in-periphery t)
 (add-hook 'after-init-hook #'show-paren-mode)
 
-;;; elec-pair
+;; elec-pair
 (add-hook 'after-init-hook #'electric-pair-mode)
 
-;;; evil-surround
+;; evil-surround
 (straight-use-package 'evil-surround)
 (add-hook 'after-init-hook #'global-evil-surround-mode)
 
-;;; evil-matchit
+;; evil-matchit
 ;; (straight-use-package 'evil-matchit)
 ;; (add-hook 'after-init-hook #'global-evil-matchit-mode)
 
-;;; rainbow-delimiters
+;; rainbow-delimiters
 (straight-use-package 'rainbow-delimiters)
 
-;;; Whitespaces
+;; Whitespaces
 (setq-default show-trailing-whitespace t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
-;;; Snippets
+;; Snippets
 (straight-use-package 'yasnippet)
 (setq yas-indent-line 'auto)
 (add-hook 'after-init-hook #'yas-global-mode)
