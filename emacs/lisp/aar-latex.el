@@ -12,7 +12,10 @@
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
 (setq TeX-save-query nil)
-(setq TeX-view-program-selection '((output-pdf "Zathura")))
+(with-eval-after-load 'tex
+  (setcar (cdr (assoc 'output-pdf TeX-view-program-selection)) "Evince"))
+
+(setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-start-server t)
 (setq TeX-electric-sub-and-superscript t)
 (setq LaTeX-indent-environment-list nil)
@@ -114,7 +117,6 @@
                                        font-lock-type-face
                                        button))
   (setq-local TeX-command-default "LatexMk")
-  (TeX-source-correlate-mode 1)
   (visual-line-mode)
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
