@@ -13,7 +13,7 @@
 
 (setq TeX-save-query nil)
 (with-eval-after-load 'tex
-  (setcar (cdr (assoc 'output-pdf TeX-view-program-selection)) "Evince"))
+  (setcar (cdr (assoc 'output-pdf TeX-view-program-selection)) "Zathura"))
 
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-start-server t)

@@ -116,7 +116,7 @@ documentation for `bibtex-generate-autokey' for more details."
 (setq ebib-bibtex-dialect 'biblatex)
 ;; Open pdf files in zathura
 (with-eval-after-load 'ebib
-  (add-to-list 'ebib-file-associations '("pdf" . "evince")))
+  (add-to-list 'ebib-file-associations '("pdf" . "zathura")))
 
 (setq ebib-bib-search-dirs '("~/Dropbox/research/"
                              "~/Dropbox/research/ongoing/"))
