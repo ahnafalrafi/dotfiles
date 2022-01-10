@@ -48,15 +48,28 @@
 (with-eval-after-load 'lsp-mode
   (define-key aar/leader-code-map (kbd "l") lsp-command-map))
 
+;; consult-lsp
+(straight-use-package 'consult-lsp)
+
+;; lsp-treemacs
+(if aar/use-treemacs
+    (straight-use-package 'lsp-treemacs))
+
 ;;;###autoload
 (defun aar/lsp-mode-h ()
   (lsp-enable-which-key-integration)
   (lsp-ui-mode)
+  (if aar/use-treemacs
+      (lsp-treemacs-sync-mode 1))
+  (consult-lsp-marginalia-mode 1)
   (evil-local-set-key 'normal (kbd "K") #'lsp-describe-thing-at-point)
   (evil-local-set-key 'normal (kbd "g d") #'lsp-find-definition)
   (evil-local-set-key 'normal (kbd "g r") #'lsp-find-references))
 
 (add-hook 'lsp-mode-hook #'aar/lsp-mode-h)
+
+(with-eval-after-load 'lsp-mode
+  (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
 
 (provide 'aar-code)
 ;;; aar-code.el ends here
