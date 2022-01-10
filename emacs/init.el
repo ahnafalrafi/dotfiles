@@ -33,8 +33,8 @@
 ;; Auto-saves, backups and lockfiles
 ;; Auto-save transforms
 (setq auto-save-default t)
-(setq auto-save-list-file-prefix (aar/expand-cache-file-name "autosave/")
-      auto-save-file-name-transforms
+(setq auto-save-list-file-prefix (aar/expand-cache-file-name "autosave/"))
+(setq auto-save-file-name-transforms
       (list (list "\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'"
                   ; Prefix tramp auto-saves to prevent conflicts
                   (concat auto-save-list-file-prefix "tramp-\\2") t)
