@@ -40,41 +40,25 @@ Otherwise returns nil"
 (with-eval-after-load 'project
   (add-to-list 'project-find-functions 'aar/project-try-julia))
 
-;;; lsp-julia
-(straight-use-package 'lsp-julia)
-
-(defconst aar/julia-sysimage (expand-file-name "~/.cache/julia/julials.so")
-  "Path to system image with precompiled LanguageServer.jl and friends.")
-
-(defconst aar/julia-language-server-project
-  (directory-file-name
-   (file-name-directory
-    (with-temp-buffer
-      (insert-file-contents (expand-file-name "julia/lang_server_locate"
-                                              (or (getenv "XDG_CACHE_HOME")
-                                                  "~/.cache")))
-      (buffer-string))))
-  "Julia project to run language server from.
-The project should have LanguageServer and SymbolServer packages
-available.")
-
-(setq lsp-julia-package-dir nil)
-(setq lsp-julia-default-environment
-      (car (last (file-expand-wildcards "~/.julia/environments/v*" t))))
-(setq lsp-julia-flags `("--startup-file=no"
-                        "--history-file=no"
-                        ,(concat "--project="
-                                 aar/julia-language-server-project)
-                        ,(if (file-exists-p aar/julia-sysimage)
-                             (concat "--sysimage=" aar/julia-sysimage))
-                        "--sysimage-native-code=yes"))
-
 ;; julia hook function
 ;;;###autoload
 (defun aar/julia-mode-h ()
+  (visual-line-mode)
+  (adaptive-wrap-prefix-mode)
+  (setq-local adaptive-wrap-extra-indent 2)
+  (setq-local evil-shift-width julia-indent-offset)
   (julia-repl-mode)
-  (require 'lsp-julia)
+  (require 'lsp-mode)
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection '("julia"
+                                                             "--startup-file=no"
+                                                             "--history-file=no"
+                                                             "/home/ahnaf/dotfiles/julia/lang_server_invoke.jl"))
+                     :major-modes '(julia-mode ess-julia-mode)
+                     :server-id 'julia-ls
+                     :multi-root t))
   (lsp-deferred))
+
 (add-hook 'julia-mode-hook #'aar/julia-mode-h)
 
 (provide 'aar-julia)
