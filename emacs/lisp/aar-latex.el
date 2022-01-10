@@ -26,15 +26,10 @@
                            LaTeX-section-label))
 (setq LaTeX-fill-break-at-separators nil)
 (setq LaTeX-item-indent 0)
-(setq preview-scale-function 1.25)
 (setq font-latex-fontify-script nil)
 (setq font-latex-fontify-sectioning 'color)
 (with-eval-after-load 'font-latex
   (set-face-foreground 'font-latex-script-char-face nil))
-
-(with-eval-after-load 'tex
-  (require 'auctex-latexmk)
-  (auctex-latexmk-setup))
 
 (add-hook 'TeX-after-compilation-finished-functions-hook
           #'TeX-revert-document-buffer)
@@ -79,6 +74,10 @@
 (straight-use-package 'auctex-latexmk)
 (setq auctex-latexmk-inherit-TeX-PDF-mode t)
 
+(with-eval-after-load 'tex
+  (require 'auctex-latexmk)
+  (auctex-latexmk-setup))
+
 ;; evil-tex
 (straight-use-package 'evil-tex)
 (setq evil-tex-toggle-override-m nil)
@@ -115,7 +114,8 @@
                                        font-latex-sedate-face
                                        font-latex-warning-face
                                        font-lock-type-face
-                                       button))
+                                       button
+                                       lsp-face-highlight-write))
   (setq-local TeX-command-default "LatexMk")
   (visual-line-mode)
   (auto-fill-mode)
