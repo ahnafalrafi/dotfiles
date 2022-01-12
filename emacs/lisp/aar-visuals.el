@@ -5,8 +5,8 @@
 ;;; Code:
 
 ;;; Font
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-11.5"))
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-11.5")
+(add-to-list 'default-frame-alist '(font . "JuliaMono-11"))
+(set-face-attribute 'default nil :font "JuliaMono-11")
 
 ;;; Dealing with Xressources - i.e. don't bother, ignore.
 (setq inhibit-x-resources t)
