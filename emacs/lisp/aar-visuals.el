@@ -27,37 +27,11 @@
   (add-hook hook #'display-fill-column-indicator-mode))
 
 ;;; Theme
-(straight-use-package 'doom-themes)
+(straight-use-package 'gruvbox-theme)
 
 (defun aar/load-theme ()
   "Wrapper function around commands for loading theme."
-  (setq doom-themes-enable-bold t)
-  (setq doom-themes-enable-italic t)
-
-  ;; (load-theme 'doom-dracula t)
-  ;; (set-face-attribute 'vertical-border nil
-  ;;                     :foreground "#6272a4"
-  ;;                     :background "#6272a4")
-
-  ;; (load-theme 'doom-vibrant t)
-  ;; (setq doom-vibrant-brighter-comments t)
-  ;; (setq doom-vibrant-brighter-modeline t)
-
-  ;; (setq doom-tokyo-night-comment-bg t)
-  ;; (setq doom-tokyo-night-brighter-comments t)
-  ;; (setq doom-tokyo-night-brighter-modeline t)
-  ;; (load-theme 'doom-tokyo-night t)
-
-  (setq doom-gruvbox-dark-variant "hard")
-  (load-theme 'doom-gruvbox t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config)
-  ;; Enable custom treemacs theme (all-the-icons must be installed!)
-  (if aar/use-treemacs
-      (doom-themes-treemacs-config)))
+  (load-theme 'gruvbox-dark-hard t))
 
 (defun aar/load-theme-after-frame-h (frame)
   "Load theme after the frame has been made.
