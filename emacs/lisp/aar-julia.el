@@ -48,16 +48,18 @@ Otherwise returns nil"
   (setq-local adaptive-wrap-extra-indent 2)
   (setq-local evil-shift-width julia-indent-offset)
   (julia-repl-mode)
+  (lsp-deferred))
+
+(with-eval-after-load 'julia-mode
   (require 'lsp-mode)
   (lsp-register-client
-    (make-lsp-client :new-connection (lsp-stdio-connection '("julia"
-                                                             "--startup-file=no"
-                                                             "--history-file=no"
-                                                             "/home/ahnaf/dotfiles/julia/lang_server_invoke.jl"))
-                     :major-modes '(julia-mode ess-julia-mode)
-                     :server-id 'julia-ls
-                     :multi-root t))
-  (lsp-deferred))
+   (make-lsp-client :new-connection (lsp-stdio-connection '("julia"
+                                                            "--startup-file=no"
+                                                            "--history-file=no"
+                                                            "/home/ahnaf/dotfiles/julia/lang_server_invoke.jl"))
+                    :major-modes '(julia-mode ess-julia-mode)
+                    :server-id 'julia-ls
+                    :multi-root t)))
 
 (add-hook 'julia-mode-hook #'aar/julia-mode-h)
 
