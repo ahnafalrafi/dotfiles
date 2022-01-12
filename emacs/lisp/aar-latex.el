@@ -123,6 +123,7 @@
   (evil-tex-mode)
   (turn-on-cdlatex)
   (reftex-mode)
+  (add-hook 'after-save-hook #'aar/latex-default-compile-on-master 0 t)
   (setq-local company-backends (append '((company-math-symbols-latex
                                           company-latex-commands
                                           company-auctex-environments
@@ -133,8 +134,7 @@
   (font-lock-add-keywords nil  '(("\\(\\\\citep\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-lock-add-keywords nil  '(("\\(\\\\citet\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-latex-add-keywords '(("citep" "*[[{")) 'reference)
-  (font-latex-add-keywords '(("citet" "*[[{")) 'reference)
-  (add-hook 'after-save-hook #'aar/latex-default-compile-on-master 0 t))
+  (font-latex-add-keywords '(("citet" "*[[{")) 'reference))
 
 (add-hook 'TeX-mode-hook #'aar/latex-mode-h)
 
