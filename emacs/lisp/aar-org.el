@@ -60,7 +60,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
           (org-cycle-internal-local)
           t)))))
 
-;;; toc-org
+;; toc-org
 (straight-use-package 'toc-org)
 (setq toc-org-hrefify-default "gh")
 
@@ -102,7 +102,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (add-hook 'org-tab-first-hook #'aar/org-cycle-only-current-subtree-h)
 (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
-;;; ob-async
+;; ob-async
 (straight-use-package 'ob-async)
 
 ;; with-eval-after-load statements
@@ -154,7 +154,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 
   (setq org-latex-default-class "aar-article"))
 
-;;; <localleader> org mode map
+;; <localleader> org mode map
 (define-prefix-command 'aar/localleader-org-mode-map)
 (evil-define-key '(normal visual motion) org-mode-map
   (kbd aar/localleader-key) 'aar/localleader-org-mode-map)
@@ -195,7 +195,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
 (define-key aar/leader-map (kbd "o") 'aar/leader-org-map)
 (which-key-add-keymap-based-replacements aar/leader-map "o" "org")
 
-;;;;;; Functions
+;; Functions
 ;;;###autoload
 (defun aar/find-file-in-org-directory ()
   (interactive)
@@ -217,7 +217,7 @@ All my (performant) foldings needs are met between this and `org-show-subtree'
   (interactive)
   (find-file (expand-file-name "readinglist.org" org-directory)))
 
-;;;;;; Bindings
+;; Bindings
 (define-key aar/leader-org-map (kbd "o") #'aar/find-file-in-org-directory)
 (define-key aar/leader-org-map (kbd "t") #'aar/jump-to-todo-file)
 (define-key aar/leader-org-map (kbd "b") #'aar/jump-to-bookmarks-file)
