@@ -18,6 +18,12 @@
 (add-hook 'after-init-hook #'evil-snipe-mode)
 (add-hook 'after-init-hook #'evil-snipe-override-mode)
 
+;;; evil-traces
+(straight-use-package 'evil-traces)
+(require 'evil-traces)
+(evil-traces-use-diff-faces)
+(evil-traces-mode)
+
 ;; anzu
 (straight-use-package 'anzu)
 (add-hook 'after-init-hook #'global-anzu-mode)

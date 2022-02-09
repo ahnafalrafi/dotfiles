@@ -40,14 +40,7 @@
 (setq evil-collection-want-unimpaired-p nil)
 (add-hook 'emacs-startup-hook #'evil-collection-init)
 
-;;; evil-traces
-(straight-use-package 'evil-traces)
-(require 'evil-traces)
-(evil-traces-use-diff-faces)
-(evil-traces-mode)
-
-;;; Keybinding definitions
-
+;; Keybinding definitions
 ;; Better escape
 (global-set-key (kbd "<escape>") #'keyboard-escape-quit)
 
@@ -148,8 +141,8 @@
 (add-to-list 'emulation-mode-map-alists 'aar/maps-alist)
 
 ;; <leader> key definitions, keymap and trigger bindings
-(defconst aar/leader-key     "SPC")
-(defconst aar/leader-alt-key "M-SPC")
+(defconst aar/leader-key          "SPC")
+(defconst aar/leader-alt-key      "M-SPC")
 (defconst aar/localleader-key     "SPC m")
 (defconst aar/localleader-alt-key "M-SPC m")
 

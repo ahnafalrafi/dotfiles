@@ -48,7 +48,7 @@
 ;; Set file for custom.el to use
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
-;;;  Load configuration files
+;;  Load configuration files
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'aar-packages)

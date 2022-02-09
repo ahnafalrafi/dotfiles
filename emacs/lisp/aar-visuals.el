@@ -4,14 +4,14 @@
 
 ;;; Code:
 
-;;; Font
-(add-to-list 'default-frame-alist '(font . "JuliaMono-11"))
-(set-face-attribute 'default nil :font "JuliaMono-11")
+;; Font
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-11"))
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-11")
 
-;;; Dealing with Xressources - i.e. don't bother, ignore.
+;; Dealing with Xressources - i.e. don't bother, ignore.
 (setq inhibit-x-resources t)
 
-;;; Cursor, tooltip and dialog box
+;; Cursor, tooltip and dialog box
 (when (fboundp 'blink-cursor-mode)
   (blink-cursor-mode -1))
 (when (fboundp 'tooltip-mode)
@@ -20,32 +20,19 @@
 (setq use-dialog-box nil)
 (setq x-gtk-use-system-tooltips nil)
 
-;;; Display line numbers and fill-column indicator
+;; Display line numbers and fill-column indicator
 (setq display-line-numbers-type 'visual)
 (dolist (hook '(prog-mode-hook text-mode-hook))
   (add-hook hook #'display-line-numbers-mode)
   (add-hook hook #'display-fill-column-indicator-mode))
 
-;;; Theme
-(straight-use-package 'gruvbox-theme)
+;; Theme
+(load-theme 'modus-vivendi t)
 
-(defun aar/load-theme ()
-  "Wrapper function around commands for loading theme."
-  (load-theme 'gruvbox-dark-hard t))
-
-(defun aar/load-theme-after-frame-h (frame)
-  "Load theme after the frame has been made.
-Useful for loading themes properly in daemon mode"
-  (with-selected-frame frame
-    (aar/load-theme)))
-
-(add-hook 'after-init-hook #'aar/load-theme)
-(add-hook 'after-make-frame-functions #'aar/load-theme-after-frame-h)
-
-;;; Icons
+;; Icons
 (straight-use-package 'all-the-icons)
 
-;;; Modeline
+;; Modeline
 ;; Base modeline settings
 (size-indication-mode t)
 (line-number-mode t)
@@ -62,7 +49,7 @@ Useful for loading themes properly in daemon mode"
 (straight-use-package 'hide-mode-line)
 (add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
 
-;;; hl-todo: additional highlighting for TODO keywords
+;; hl-todo: additional highlighting for TODO keywords
 (straight-use-package 'hl-todo)
 (dolist (hook '(prog-mode-hook tex-mode-hook markdown-mode-hook))
   (add-hook hook #'hl-todo-mode))

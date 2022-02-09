@@ -32,8 +32,7 @@
 (setq-default truncate-lines t)
 
 ;; electric-indent
-;; See: https://emacs.stackexchange.com/questions/20896/change-the-behaviour-of-ret-with-electric-indent-to-only-indent-the-new-line
-(setq electric-indent-inhibit t)
+(setq-default electric-indent-inhibit t)
 
 ;; adaptive-wrap
 (straight-use-package 'adaptive-wrap)

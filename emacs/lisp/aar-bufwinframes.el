@@ -4,14 +4,14 @@
 
 ;;; Code:
 
-;;; Scrolling
+;; Scrolling
 (setq-default scroll-margin 0)
 (setq-default scroll-step 1)
 (setq-default scroll-preserve-screen-position nil)
 (setq-default scroll-conservatively 10000)
 (setq-default auto-window-vscroll nil)
 
-;;; Buffers
+;; Buffers
 ;; <leader> buffer map
 (define-prefix-command 'aar/leader-buffer-map)
 (define-key aar/leader-map (kbd "b") 'aar/leader-buffer-map)
@@ -55,7 +55,7 @@
 (setq all-the-icons-ibuffer-human-readable-size t)
 (add-hook 'ibuffer-mode-hook #'all-the-icons-ibuffer-mode)
 
-;;; Windows
+;; Windows
 ;; Favor vertical splits over horizontal ones. Screens are usually wide.
 (setq split-width-threshold 160)
 (setq split-height-threshold nil)
@@ -72,7 +72,7 @@
 (define-key evil-window-map (kbd "f")   #'ffap-other-window)
 (define-key evil-window-map (kbd "C-f") #'ffap-other-window)
 
-;;; Frames
+;; Frames
 ;; Maximize new frames
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -99,7 +99,7 @@
 (define-key aar/leader-frame-map (kbd "o") #'make-frame)
 (define-key aar/leader-frame-map (kbd "q") #'aar/delete-frame-or-kill-emacs)
 
-;;; Quitting emacs
+;; Quitting emacs
 ;; Don't require confirmation every time when quitting.
 (setq confirm-kill-emacs nil)
 

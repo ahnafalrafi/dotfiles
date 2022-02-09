@@ -4,12 +4,12 @@
 
 ;;; Code:
 
-;;; <leader> applications map
+;; <leader> applications map
 (define-prefix-command 'aar/leader-apps-map)
 (define-key aar/leader-map (kbd "a") 'aar/leader-apps-map)
 (which-key-add-keymap-based-replacements aar/leader-map "a" "apps")
 
-;;; vterm
+;; vterm
 (straight-use-package 'vterm)
 (setq vterm-always-compile-module t)
 (setq vterm-buffer-name-string "vterm: %s")
@@ -70,6 +70,9 @@ method to prepare vterm at the corresponding remote directory."
 ;; vterm keybindings
 (define-key aar/leader-apps-map (kbd "t") #'aar/vterm-here-other-window)
 (define-key aar/leader-apps-map (kbd "T") #'aar/vterm-here)
+
+;; notmuch
+(autoload 'notmuch "notmuch" "notmuch mail" t)
 
 (provide 'aar-apps)
 ;;; aar-apps.el ends here

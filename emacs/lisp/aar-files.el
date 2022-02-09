@@ -76,7 +76,7 @@ the minibuffer prompt."
     (error "Couldn't find file name in current buffer")))
 
 ;; Basic keybindings
-(define-key aar/leader-map (kbd ".") #'find-file)
+(define-key aar/leader-map      (kbd ".")   #'find-file)
 (define-key aar/leader-file-map (kbd "f")   #'find-file)
 (define-key aar/leader-file-map (kbd "n")   #'rename-file)
 (define-key aar/leader-file-map (kbd "s")   #'save-buffer)

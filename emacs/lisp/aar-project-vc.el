@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-;;; project.el
+;; project.el
 (setq project-list-file (aar/expand-etc-file-name "project-list.el"))
 
 ;; Adapted from Manuel Uberti's config.
@@ -26,7 +26,7 @@ DIR must include a .project file to be considered a project."
 (define-key aar/leader-map (kbd "SPC") #'project-find-file)
 (define-key aar/leader-map (kbd "p")   project-prefix-map)
 
-;;; vc
+;; vc
 (setq vc-follow-symlinks t)
 (setq vc-ignore-dir-regexp (format "\\(%s\\)\\|\\(%s\\)"
                                    vc-ignore-dir-regexp
@@ -35,7 +35,7 @@ DIR must include a .project file to be considered a project."
 (define-key aar/leader-map (kbd "v") #'vc-prefix-map)
 (define-key vc-prefix-map  (kbd "c") #'vc-create-repo)
 
-;;; magit
+;; magit
 (straight-use-package 'magit)
 
 ;; settings for transient (a magit dependency)
@@ -43,7 +43,7 @@ DIR must include a .project file to be considered a project."
 (setq transient-values-file  (aar/expand-cache-file-name "transient/values"))
 (setq transient-history-file (aar/expand-cache-file-name "transient/history"))
 
-;;; gitgutter
+;; gitgutter
 (straight-use-package 'git-gutter)
 (add-hook 'after-init-hook #'global-git-gutter-mode)
 
