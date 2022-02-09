@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: frac-short
-# key: //
+# key: fr
 # condition: t
 # --
 \frac{${1:`(or % "")`}}{$2} $0
