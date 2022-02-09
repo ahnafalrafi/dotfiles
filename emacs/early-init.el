@@ -8,7 +8,7 @@
 (setq package-enable-at-startup nil)
 
 ;; Defer garbage collection
-(setq gc-cons-threshold (* 80 1024 1024))
+(setq gc-cons-threshold (* 50 1024 1024))
 
 ;; Disable gui elements before they are initialized.
 (when (featurep 'menu-bar)
@@ -56,10 +56,7 @@ Used for files that change often. Must end with a slash.")
 
 (when (featurep 'native-compile)
   ;; Silence compiler warnings as they can be pretty disruptive
-  (setq native-comp-async-report-warnings-errors nil)
-
-  ;; Set the right directory to store the native comp cache
-  (setcar native-comp-eln-load-path (aar/expand-cache-file-name "eln-cache/")))
+  (setq native-comp-async-report-warnings-errors nil))
 
 (provide 'early-init)
 ;;; early-init.el ends here

@@ -6,13 +6,13 @@
 
 ;;; gcmh
 (straight-use-package 'gcmh)
-
 (setq gcmh-idle-delay 5)
-(setq gcmh-high-cons-threshold (* 100 1024 1024))
-(setq read-process-output-max (* (* 1024 1024) 8))
+(setq gcmh-high-cons-threshold (* 50 1024 1024))
 (setq gcmh-verbose init-file-debug)
-(require 'gcmh)
 (gcmh-mode 1)
+
+;; (setq read-process-output-max (* (* 1024 1024) 8))
+(setq-default read-process-output-max (* 1024 1024))
 
 ;;; Dashboard
 (straight-use-package 'dashboard)
