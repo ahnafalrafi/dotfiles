@@ -40,7 +40,15 @@ Otherwise returns nil"
 (with-eval-after-load 'project
   (add-to-list 'project-find-functions 'aar/project-try-julia))
 
-;; julia hook function
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               `(julia-mode
+                 .
+                 ("julia"
+                  "--startup-file=no"
+                  "--history-file=no"
+                  "/home/ahnaf/Dropbox/dotfiles/julia/lang_server_invoke.jl"))))
+
 ;;;###autoload
 (defun aar/julia-mode-h ()
   (visual-line-mode)
@@ -48,18 +56,7 @@ Otherwise returns nil"
   (setq-local adaptive-wrap-extra-indent 2)
   (setq-local evil-shift-width julia-indent-offset)
   (julia-repl-mode)
-  (lsp-deferred))
-
-(with-eval-after-load 'julia-mode
-  (require 'lsp-mode)
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("julia"
-                                                            "--startup-file=no"
-                                                            "--history-file=no"
-                                                            "/home/ahnaf/dotfiles/julia/lang_server_invoke.jl"))
-                    :major-modes '(julia-mode ess-julia-mode)
-                    :server-id 'julia-ls
-                    :multi-root t)))
+  (eglot-ensure))
 
 (add-hook 'julia-mode-hook #'aar/julia-mode-h)
 

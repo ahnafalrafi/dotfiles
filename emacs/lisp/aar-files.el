@@ -154,16 +154,5 @@ default behavior."
 
 (define-key aar/leader-file-map (kbd "r") #'recentf-open-files)
 
-;; treemacs
-(defvar aar/use-treemacs t
-  "Indicator for whether or not treemacs will be used in this config.")
-
-(if aar/use-treemacs
-    (progn
-      (straight-use-package 'treemacs)
-      (setq treemacs-persist-file
-            (aar/expand-etc-file-name "treemacs-persist"))
-      (define-key aar/leader-file-map (kbd "t") #'treemacs)))
-
 (provide 'aar-files)
 ;;; aar-files.el ends here

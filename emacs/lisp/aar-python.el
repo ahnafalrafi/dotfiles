@@ -3,11 +3,12 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;;;###autoload
 (defun aar/python-h ()
   (tree-sitter-mode)
   (rainbow-delimiters-mode)
-  (lsp-deferred))
+  (eglot-ensure))
 
 (add-hook 'python-mode-hook #'aar/python-h)
 

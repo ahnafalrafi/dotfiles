@@ -7,7 +7,7 @@
 ;;;###autoload
 (defun aar/cc-h ()
   (tree-sitter-mode)
-  (lsp-deferred))
+  (eglot-ensure))
 
 (dolist (hook '(c-mode-hook c++-mode-hook))
   (add-hook hook #'aar/cc-h))
