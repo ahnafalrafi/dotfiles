@@ -18,7 +18,9 @@
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-start-server t)
 (setq TeX-electric-sub-and-superscript t)
+(setq TeX-electric-math (cons "\\(" "\\)"))
 (setq LaTeX-indent-environment-list nil)
+(setq LaTeX-electric-left-right-brace t)
 (setq LaTeX-section-hook '(LaTeX-section-heading
                            LaTeX-section-title
                            LaTeX-section-toc
@@ -33,11 +35,6 @@
 
 (add-hook 'TeX-after-compilation-finished-functions-hook
           #'TeX-revert-document-buffer)
-
-;; Completions
-(straight-use-package 'company-auctex)
-(straight-use-package 'company-reftex)
-(straight-use-package 'company-math)
 
 ;; <localleader> LaTeX-mode bindings
 (define-prefix-command 'aar/localleader-LaTeX-mode-map)
@@ -83,12 +80,6 @@
 (setq evil-tex-toggle-override-m nil)
 (setq evil-tex-toggle-override-t t)
 
-;; cdlatex
-(straight-use-package 'cdlatex)
-(setq cdlatex-sub-super-scripts-outside-math-mode nil)
-(setq cdlatex-use-dollar-to-ensure-math nil)
-(setq cdlatex-simplify-sub-super-scripts nil)
-
 ;; reftex
 (setq reftex-plug-into-AUCTeX t)
 (setq reftex-toc-split-windows-fraction 0.3)
@@ -102,7 +93,23 @@
   "Run `TeX-command-default' on `TeX-master' for current buffer."
   (TeX-command TeX-command-default #'TeX-master-file))
 
+;;;###autoload
+(defun aar/latex-compile-after-save-on ()
+  (interactive)
+  (add-hook 'after-save-hook #'aar/latex-default-compile-on-master 0 t))
+
+;;;###autoload
+(defun aar/latex-compile-after-save-off ()
+  (interactive)
+  (remove-hook 'after-save-hook #'aar/latex-default-compile-on-master t))
+
+(define-key aar/localleader-LaTeX-mode-map (kbd "ll") #'aar/latex-compile-after-save-on)
+(define-key aar/localleader-LaTeX-mode-map (kbd "lL") #'aar/latex-compile-after-save-off)
+
 ;; Hook for tex modes
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs '(tex-mode . ("texlab"))))
+
 ;;;###autoload
 (defun aar/latex-mode-h ()
   (setq-local fill-nobreak-predicate nil)
@@ -121,16 +128,8 @@
   (auto-fill-mode)
   (adaptive-wrap-prefix-mode)
   (evil-tex-mode)
-  (turn-on-cdlatex)
   (reftex-mode)
-  (add-hook 'after-save-hook #'aar/latex-default-compile-on-master 0 t)
-  (setq-local company-backends (append '((company-math-symbols-latex
-                                          company-latex-commands
-                                          company-auctex-environments
-                                          company-auctex-macros
-                                          company-reftex-labels
-                                          company-reftex-citations))
-                                       company-backends))
+  (eglot-ensure)
   (font-lock-add-keywords nil  '(("\\(\\\\citep\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-lock-add-keywords nil  '(("\\(\\\\citet\\)\\s-*{" 1 font-lock-keyword-face t)))
   (font-latex-add-keywords '(("citep" "*[[{")) 'reference)

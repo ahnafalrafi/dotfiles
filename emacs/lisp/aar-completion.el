@@ -39,42 +39,32 @@
 (setq completion-category-defaults nil)
 (setq completion-category-overrides '((file (styles . (partial-completion)))))
 
-;; company-mode
-(straight-use-package 'company)
+;; corfu
+(straight-use-package 'corfu)
+(setq corfu-auto t)
+(setq corfu-cycle t)
+(setq corfu-preselect-first nil)
+(setq corfu-quit-at-boundary t)
+(setq corfu-quit-no-match t)
+(add-hook 'after-init-hook #'corfu-global-mode)
 
-(with-eval-after-load 'company
-  (evil-define-key 'insert company-mode-map
-    (kbd "C-n")     #'company-select-next
-    (kbd "C-p")     #'company-select-previous
-    (kbd "C-x C-o") #'company-manual-begin
-    (kbd "C-x C-f") #'company-files)
+;; cape
+(straight-use-package 'cape)
 
-  (evil-define-key 'insert company-active-map
-    (kbd "C-n") #'company-select-next-or-abort
-    (kbd "C-p") #'company-select-previous-or-abort
-    (kbd "C-j") #'company-select-next
-    (kbd "C-k") #'company-select-previous))
-
-
-(defvar aar/company-backends-global '(company-capf
-                                      company-files
-                                      company-keywords
-                                      company-yasnippet)
-  "Values for `company-backends' used everywhere.")
-
-(setq company-backends aar/company-backends-global)
-(setq company-minimum-prefix-length 2)
-(setq company-idle-delay 0.0)
-(setq company-show-numbers nil)
-(setq company-selection-wrap-around t)
-(setq company-tooltip-idle-delay 0.0)
-(setq company-tooltip-limit 15)
-(setq company-minimum-prefix-length 1)
-(setq company-tooltip-align-annotations t)
-(setq company-transformers '(company-sort-by-backend-importance))
-
-(add-hook 'after-init-hook #'global-company-mode)
-(add-hook 'after-init-hook #'company-tng-mode)
+(with-eval-after-load 'corfu
+  ;; See https://github.com/minad/corfu/issues/12#issuecomment-869037519
+  (evil-make-overriding-map corfu-map)
+  (advice-add 'corfu--setup :after 'evil-normalize-keymaps)
+  (advice-add 'corfu--teardown :after 'evil-normalize-keymaps)
+  (evil-define-key 'insert corfu-map
+    (kbd "C-n")     #'corfu-next
+    (kbd "C-p")     #'corfu-previous
+    (kbd "C-j")     #'corfu-next
+    (kbd "C-k")     #'corfu-previous
+    (kbd "TAB")     #'corfu-next
+    (kbd "S-TAB")   #'corfu-previous
+    (kbd "C-x C-o") #'completion-at-point
+    (kbd "C-x C-f") #'cape-file))
 
 (provide 'aar-completion)
 ;;; aar-completion.el ends here
