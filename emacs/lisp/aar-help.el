@@ -7,23 +7,10 @@
 ;; <leader> bindings for help
 (define-key aar/leader-map (kbd "h") help-map)
 
-;; helpful
-(straight-use-package 'helpful)
-(add-hook 'helpful-mode-hook #'display-line-numbers-mode)
-(add-hook 'helpful-mode-hook #'visual-line-mode)
-
-(global-set-key [remap describe-key]      #'helpful-key)
-(global-set-key [remap describe-command]  #'helpful-command)
-(global-set-key [remap describe-function] #'helpful-callable)
-(global-set-key [remap describe-variable] #'helpful-variable)
-(global-set-key [remap describe-symbol]   #'helpful-symbol)
-(global-set-key [remap apropos-command]   #'consult-apropos)
-
 ;; elisp-demos
 (straight-use-package 'elisp-demos)
 (advice-add 'describe-function-1
             :after #'elisp-demos-advice-describe-function-1)
-(advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
 
 ;; Hooks
 ;;;###autoload
