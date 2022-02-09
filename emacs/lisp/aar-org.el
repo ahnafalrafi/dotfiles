@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-(straight-use-package 'org)
+;; (straight-use-package 'org)
 (setq org-directory "~/Dropbox/org/")
 (setq org-default-notes-file (concat org-directory "notes.org"))
 (setq org-capture-templates
